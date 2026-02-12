@@ -164,7 +164,7 @@ function App() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe a scene..."
-                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-sm px-6 py-5 text-[16px] font-normal text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
+                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-[12px] px-6 py-5 text-[16px] font-normal text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
                   disabled={isGenerating}
                 />
 
@@ -172,7 +172,7 @@ function App() {
                   ref={buttonRef}
                   onClick={() => generateMoodBoard()}
                   disabled={isGenerating || !prompt.trim()}
-                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.15em] rounded-sm hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.15em] rounded-[12px] hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {isGenerating ? (
                     <span className="flex items-center justify-center gap-3">
