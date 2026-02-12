@@ -5,7 +5,9 @@
 
 ## Product Vision
 
-**CineBox** is a digital gallery for cinematic moments—transforming iconic A24 scenes into ambient art, inspired by Samsung's Frame TV. Users curate and display film stills as living artwork, celebrating the visual language of independent cinema.
+**CineBox: Collaborative scene visualization with the framing of art mode on Samsung Frame.**
+
+Transform cinematic moments into displayable art. Users visualize, curate, and share A24 scenes in ambient gallery mode—celebrating independent cinema as living artwork for your space.
 
 ---
 
@@ -213,10 +215,18 @@ Collection {
 - Joint marketing campaign
 
 ### 7.3 Positioning Statement
-> "CineBox turns your screen into a gallery of cinematic moments. Curate scenes from A24 films and independent cinema, displayed like art in your living space."
 
-**Category**: Digital Gallery / Ambient Display
-**Comparison**: Spotify (music) : CineBox (film scenes)
+**Tagline:**
+> "Collaborative scene visualization with the framing of art mode on Samsung Frame."
+
+**One-Liner:**
+> "CineBox turns your screen into a gallery of cinematic moments. Visualize, curate, and display A24 scenes like art in your living space."
+
+**Category**: Collaborative Gallery / Ambient Display
+**Comparison**:
+- Pinterest (static images) : CineBox (cinematic scenes)
+- Spotify (music) : CineBox (film moments)
+- Frame TV Art Mode (paintings) : CineBox (A24 scenes)
 
 ---
 

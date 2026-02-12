@@ -158,8 +158,8 @@ function App() {
               <h2 className="text-[72px] leading-[1.05] font-light text-white mb-8 tracking-tight">
                 Visualize your scene
               </h2>
-              <p className="text-[15px] leading-relaxed text-[#999999] max-w-[600px] mx-auto">
-                Transform a cinematic moment into a mood board. See how others interpret the same scene.
+              <p className="text-[15px] leading-relaxed text-[#999999] max-w-[650px] mx-auto">
+                Collaborative scene visualization with the framing of art mode. Transform cinematic moments into displayable art.
               </p>
             </div>
 
