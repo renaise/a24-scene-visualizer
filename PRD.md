@@ -7,7 +7,9 @@
 
 **CineBox: Collaborative scene visualization with the framing of art mode on Samsung Frame.**
 
-Transform cinematic moments into displayable art. Users visualize, curate, and share A24 scenes in ambient gallery mode—celebrating independent cinema as living artwork for your space.
+**CRITICAL:** CineBox is an **archive of actual A24 film scenes**—not AI-generated content. Think Framestore's VFX reference library or Hollywood's master shot catalog, but exclusively for A24's film archive.
+
+Users browse, curate, and display **real scenes from A24's catalog** in ambient gallery mode—celebrating the studio's cinematic library as living artwork for your space.
 
 ---
 
@@ -19,16 +21,18 @@ Transform cinematic moments into displayable art. Users visualize, curate, and s
 Just as Samsung's Frame displays art when idle, CineBox displays curated cinematic moments. It bridges the gap between streaming (passive consumption) and collecting (active curation), positioning film stills as displayable art.
 
 ### 1.2 What It Is
-- **Digital gallery** for A24 film scenes and stills
-- **Ambient display mode** that rotates curated moments
-- **Mood board generator** powered by AI (scene → visual interpretation)
-- **Social curation platform** for discovering trending scenes
+- **Archival library** of actual A24 film scenes (master shot list)
+- **Digital gallery** displaying official A24 cinematography
+- **Ambient display mode** that rotates curated archive moments
+- **Social curation platform** for discovering iconic A24 scenes
+- **Reference library** like ShotDeck, but A24-exclusive
 
 ### 1.3 What It's Not
-- NOT a streaming service
-- NOT a video player
-- NOT a social network (though it has social features)
-- NOT comprehensive (focuses on A24 aesthetic)
+- NOT AI-generated scenes (uses real A24 archive)
+- NOT a streaming service (no full films)
+- NOT a video player (static scenes/stills)
+- NOT user-generated content (official A24 catalog only)
+- NOT comprehensive cinema (A24 films only)
 
 ---
 
@@ -73,44 +77,76 @@ Just as Samsung's Frame displays art when idle, CineBox displays curated cinemat
 
 ## 4. Core Features
 
-### 4.1 Gallery Mode (Frame TV Mode)
+### 4.1 Master Shot Archive
+**A24's Complete Scene Library**
+
+- **Film Catalog**
+  - Every A24 film (2012-present)
+  - Organized by: Film, Director, Year, DP, Genre
+  - Searchable metadata (mood, location, color, lighting)
+
+- **Scene Database**
+  - Official stills from each film
+  - Key moments, iconic shots
+  - Master shot list format (VFX reference style)
+  - High-resolution archival quality
+
+- **Browse & Filter**
+  - By film: "Show all scenes from Moonlight"
+  - By mood: "Coastal," "Urban Isolation," "Neon-lit"
+  - By DP: "Robbie Ryan cinematography"
+  - By color palette: "Muted blues," "Golden hour"
+
+### 4.2 Gallery Mode (Frame TV Mode)
 **The Main Experience**
 
 - **Auto-Rotate Display**
-  - Scenes cycle every 30-60 seconds
+  - Archive scenes cycle every 30-60 seconds
   - Smooth crossfade transitions
   - No UI chrome (pure imagery)
 
 - **Ambient Adaptation**
   - Brightness adjusts to room lighting
   - Borders/matting for "framed" effect
-  - Film grain overlay option
+  - Original film grain preserved
 
 - **Scene Metadata**
-  - Subtle overlay: Film title, director, year
+  - Overlay: Film title, director, DP, year
+  - Timecode reference (for VFX/reference use)
   - Appears on hover/pause
-  - Minimal, non-intrusive
 
 - **Collections**
-  - Curate personal galleries
-  - Themes: "Moody Interiors," "Coastal Scenes," "Urban Isolation"
+  - Curate from A24 archive
+  - Themes: "Ari Aster Moments," "Coastal Scenes," "A24 Neon"
   - Save favorites, share collections
 
-### 4.2 Scene Generator (AI Mood Board)
-**Creative Tool**
-
-- Input: Text description of a scene
-- Output: 4 AI-generated interpretations in A24 style
-- Style transfer: "35mm film grain, muted colors, contemplative atmosphere"
-- Social feature: See how others visualized the same scene
-
-### 4.3 Trending Scenes
+### 4.3 Trending Archive
 **Discovery Feed**
 
-- Most-remixed scenes this week
-- Curated by A24 aesthetic
+- Most-saved scenes this week
+- Newly added archive moments
+- Trending by film (when new A24 release)
 - One-click add to personal gallery
-- Metadata: Film source, director, year
+- Metadata: Film source, director, DP, year
+
+### 4.4 Reference Library Features
+**For Creative Professionals**
+
+- **Shot Comparison**
+  - Side-by-side scene reference
+  - Compare DP styles (Robbie Ryan vs. Darius Khondji)
+  - Study lighting setups
+
+- **Mood Board Export**
+  - Export collection as PDF
+  - Share reference boards with teams
+  - Timecode annotations
+
+- **Technical Metadata**
+  - Camera: 35mm, 16mm, digital
+  - Aspect ratio: 1.85:1, 2.39:1, etc.
+  - Film stock (when available)
+  - Lens information
 
 ### 4.4 Display Settings
 **Customization**
@@ -160,21 +196,33 @@ Just as Samsung's Frame displays art when idle, CineBox displays curated cinemat
 ```typescript
 Scene {
   id: string
-  imageUrl: string
-  prompt: string
-  filmSource?: {
+  imageUrl: string // High-res archive still
+
+  // Film metadata (official A24 archive)
+  film: {
     title: string
     director: string
+    dp: string // Director of Photography
     year: number
+    runtime: string
   }
+
+  // Scene metadata
   metadata: {
-    aspectRatio: string
-    mood: string[]
+    timecode: string // "00:34:12" in film
+    aspectRatio: string // "2.39:1"
+    camera: string // "35mm Kodak Vision3"
+    lens: string // "Cooke Anamorphic"
+    mood: string[] // ["coastal", "contemplative"]
+    location: string // "Beach exterior, night"
+    colorPalette: string[] // ["muted blues", "warm sand"]
   }
+
+  // Archive stats
   stats: {
     views: number
     saves: number
-    remixes: number
+    referenceUses: number // for creatives
   }
 }
 
@@ -194,17 +242,24 @@ Collection {
 ### 7.1 A24 Partnership Opportunity
 **Why This Benefits A24:**
 
-1. **Brand Extension**: Extends A24 beyond streaming into lifestyle
-2. **Discovery Engine**: Drives interest in catalog films
-3. **Cultural Capital**: Positions A24 films as "displayable art"
+1. **Archive Monetization**: Unlock value from archival stills library
+2. **Discovery Engine**: Scenes drive interest in catalog films
+3. **Cultural Capital**: Positions A24 as "displayable art" brand
 4. **Data Insights**: Which scenes resonate? Which films trend?
-5. **Merchandise Synergy**: Frame TV partnerships, physical prints
+5. **Creative Tool**: Industry professionals use for reference
+6. **Merchandise Synergy**: Frame TV partnerships, physical prints
 
-**Partnership Model:**
-- Official A24 scene library access
+**Partnership Model (CRITICAL):**
+- **Official A24 archive access** (master shot list)
+- License high-res stills from entire catalog
 - Co-branded "A24 x CineBox" positioning
-- Revenue share on premium collections
-- Cross-promotion on A24 social channels
+- Revenue share: 70/30 split (A24/CineBox)
+- A24 retains all IP rights to scenes
+
+**Value Exchange:**
+- CineBox: Gets exclusive access to A24 archive
+- A24: Gets new revenue stream + catalog discovery engine
+- Users: Access to official, high-quality A24 scenes
 
 ### 7.2 Samsung Frame TV Integration
 **Distribution Partnership**
@@ -251,14 +306,22 @@ Collection {
 
 ## 9. Roadmap
 
-### V1 - MVP (Current)
-- [x] Scene generator (AI mood boards)
-- [x] Trending scenes feed
+### V1 - MVP (Current/Prototype)
 - [x] Dark A24 aesthetic
 - [x] Progressive blur effects
+- [x] Gallery grid layout
 - [x] Basic save functionality
+- [ ] **Replace AI generation with archive browsing**
+- [ ] **Integrate official A24 scene library**
 
-### V2 - Gallery Mode
+### V2 - Archive Integration
+- [ ] A24 master shot list database
+- [ ] Film catalog (all A24 releases)
+- [ ] Browse by film/director/DP
+- [ ] Search by mood/color/location
+- [ ] High-res archival stills
+
+### V3 - Gallery Mode
 - [ ] Full-screen ambient display
 - [ ] Auto-rotate with customizable timing
 - [ ] Mat frame options
@@ -312,16 +375,18 @@ Collection {
 
 | Product | Category | Strength | Weakness |
 |---------|----------|----------|----------|
-| **Samsung Frame TV** | Ambient Display | Hardware integration | Limited to static art |
-| **Letterboxd** | Film Discovery | Social + logging | No visual display mode |
-| **Pinterest** | Mood Boards | Discovery engine | Generic, not cinematic |
-| **Behance/Dribbble** | Creative Inspiration | Professional quality | Not film-specific |
-| **A24 Shop** | Merchandise | Official A24 | No digital/ambient offering |
+| **ShotDeck** | Film Reference | HD screenshots, searchable | All films (not curated), no display mode |
+| **Samsung Frame TV** | Ambient Display | Hardware integration | Generic art (not cinematic) |
+| **Letterboxd** | Film Discovery | Social + logging | No scene browsing |
+| **Framestore** | VFX Reference | Professional archive | Industry-only, VFX focus |
+| **Getty Images** | Stock Photos | High quality | Expensive, not display-focused |
+| **A24 Shop** | Merchandise | Official A24 | Physical only, no digital |
 
 **CineBox's Unique Position:**
-- Only product combining film discovery + ambient display
-- Only A24-focused digital gallery
-- Only "Frame TV for cinema" experience
+- Only **A24-exclusive scene archive** for consumers
+- Only product combining **archival browsing + ambient display**
+- Only **master shot list** for A24's complete catalog
+- Only "Frame TV for A24 cinema" experience
 
 ---
 
