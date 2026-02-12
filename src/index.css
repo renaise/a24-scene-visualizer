@@ -4,13 +4,13 @@
   --font-family-sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   --font-family-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
 
-  /* Renaise.github.io - clean, high contrast */
-  --color-surface: #ffffff;
-  --color-surface-secondary: #fafafa;
-  --color-text: #000000;
-  --color-text-muted: #666666;
-  --color-border: #e0e0e0;
-  --color-border-light: #f0f0f0;
+  /* A24 Films - dark, high contrast gallery */
+  --color-surface: #000000;
+  --color-surface-secondary: #0a0a0a;
+  --color-text: #ffffff;
+  --color-text-muted: #999999;
+  --color-border: #1a1a1a;
+  --color-border-light: #151515;
 }
 
 * {
@@ -27,8 +27,24 @@ body {
 }
 
 ::selection {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Progressive blur effect */
+@keyframes fadeBlur {
+  from {
+    filter: blur(20px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.progressive-blur {
+  animation: fadeBlur 0.8s ease-out;
 }
 
 /* Clean, high-contrast typography */
@@ -51,12 +67,11 @@ h1, h2, h3 {
   }
 }
 
-/* Clean image treatment */
+/* A24 gallery image treatment with progressive blur */
 .image-frame {
   position: relative;
   overflow: hidden;
   background: var(--color-surface-secondary);
-  border: 1px solid var(--color-border-light);
 }
 
 .image-frame img {
@@ -64,6 +79,31 @@ h1, h2, h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.image-frame:hover img {
+  transform: scale(1.02);
+}
+
+/* Progressive blur overlay on hover */
+.image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.image-frame:hover::after {
+  opacity: 1;
 }
 
 /* Editorial link style */

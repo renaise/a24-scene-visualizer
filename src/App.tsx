@@ -120,27 +120,27 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* Clean header - renaise.github.io style */}
-      <header className="border-b border-[#e0e0e0] bg-white">
-        <div className="max-w-[1200px] mx-auto px-8 py-6">
+    <div className="min-h-screen bg-black">
+      {/* A24 style header - dark, minimal */}
+      <header className="border-b border-[#1a1a1a] bg-black backdrop-blur">
+        <div className="max-w-[1400px] mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-[14px] font-semibold tracking-tight text-black">
+            <h1 className="text-[13px] font-semibold tracking-wide text-white uppercase">
               CineBox
             </h1>
-            <nav className="flex gap-6">
+            <nav className="flex gap-8">
               <button
                 onClick={() => setShowTrending(false)}
-                className={`text-[13px] font-medium transition-colors ${
-                  !showTrending ? 'text-black' : 'text-[#666666]'
+                className={`text-[12px] font-medium uppercase tracking-wider transition-colors ${
+                  !showTrending ? 'text-white' : 'text-[#666666]'
                 }`}
               >
                 Create
               </button>
               <button
                 onClick={() => setShowTrending(true)}
-                className={`text-[13px] font-medium transition-colors ${
-                  showTrending ? 'text-black' : 'text-[#666666]'
+                className={`text-[12px] font-medium uppercase tracking-wider transition-colors ${
+                  showTrending ? 'text-white' : 'text-[#666666]'
                 }`}
               >
                 Trending
@@ -150,27 +150,27 @@ function App() {
         </div>
       </header>
 
-      <main className="py-16">
+      <main className="py-20 progressive-blur">
         {!showTrending ? (
           <>
-            {/* Hero - clean, high contrast */}
-            <div className="max-w-[1200px] mx-auto px-8 mb-20">
-              <h2 className="text-[56px] leading-[1.1] font-semibold text-black mb-6 max-w-[800px] tracking-tight">
+            {/* Hero - A24 dark gallery style */}
+            <div className="max-w-[1400px] mx-auto px-8 mb-24 text-center">
+              <h2 className="text-[72px] leading-[1.05] font-light text-white mb-8 tracking-tight">
                 Visualize your scene
               </h2>
-              <p className="text-[16px] leading-relaxed text-[#666666] max-w-[500px]">
+              <p className="text-[15px] leading-relaxed text-[#999999] max-w-[600px] mx-auto">
                 Transform a cinematic moment into a mood board. See how others interpret the same scene.
               </p>
             </div>
 
-            {/* Input - clean */}
-            <div className="max-w-[1200px] mx-auto px-8 mb-24">
-              <div className="max-w-[700px]">
+            {/* Input - A24 dark style */}
+            <div className="max-w-[1400px] mx-auto px-8 mb-32">
+              <div className="max-w-[800px] mx-auto">
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe a scene..."
-                  className="w-full h-[140px] bg-white border border-[#e0e0e0] rounded-md px-5 py-4 text-[15px] text-black placeholder-[#999999] focus:outline-none focus:border-black resize-none transition-colors mb-4"
+                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-sm px-6 py-5 text-[16px] text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
                   disabled={isGenerating}
                 />
 
@@ -178,10 +178,10 @@ function App() {
                   ref={buttonRef}
                   onClick={() => generateMoodBoard()}
                   disabled={isGenerating || !prompt.trim()}
-                  className="flashlight-button px-7 py-3.5 bg-black text-white text-[13px] font-semibold tracking-wide rounded-md hover:bg-[#333333] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[12px] font-semibold uppercase tracking-widest rounded-sm hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {isGenerating ? (
-                    <span className="flex items-center gap-2.5">
+                    <span className="flex items-center justify-center gap-3">
                       <Loader2 className="w-4 h-4 animate-spin" />
                       Generating
                     </span>
@@ -193,36 +193,37 @@ function App() {
             </div>
 
             {error && (
-              <div className="max-w-[1200px] mx-auto px-8 mb-16">
-                <div className="max-w-[700px] p-4 bg-red-50 border border-red-200 rounded-md text-red-700 text-[14px]">
+              <div className="max-w-[1400px] mx-auto px-8 mb-20">
+                <div className="max-w-[800px] mx-auto p-5 bg-red-900/20 border border-red-800/50 rounded-sm text-red-400 text-[14px] backdrop-blur">
                   {error}
                 </div>
               </div>
             )}
 
-            {/* Images - Clean Grid (renaise.github.io style) */}
+            {/* Images - A24 Gallery Grid with Progressive Blur */}
             {images.length > 0 && (
-              <div className="max-w-[1200px] mx-auto px-8">
-                <div className="image-grid mb-16">
+              <div className="max-w-[1400px] mx-auto px-8 section-blur">
+                <div className="image-grid mb-20">
                   {images.map((image, i) => (
                     <div
                       key={i}
-                      className="image-frame aspect-video rounded-md group relative overflow-hidden"
+                      className="image-frame aspect-[16/10] rounded-sm group relative overflow-hidden progressive-blur"
+                      style={{ animationDelay: `${i * 100}ms` }}
                     >
                       <img
                         src={image.url}
                         alt={`Scene ${i + 1}`}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <div className="flex items-center justify-between backdrop-blur-sm bg-black/40 rounded-sm px-4 py-3">
+                            <div className="flex items-center gap-4">
                               <button
                                 onClick={() => handleSave(image)}
-                                className="flex items-center gap-1.5 text-white/90 hover:text-white text-[11px] font-medium tracking-wide transition-colors"
+                                className="flex items-center gap-2 text-white/90 hover:text-white text-[11px] font-medium uppercase tracking-wider transition-colors"
                               >
-                                <Heart className="w-3.5 h-3.5" />
+                                <Heart className="w-4 h-4" />
                                 Save
                               </button>
                               <span className="text-white/60 text-[11px]">
@@ -233,7 +234,7 @@ function App() {
                               onClick={() => handleShare(image)}
                               className="text-white/90 hover:text-white transition-colors"
                             >
-                              <Share2 className="w-3.5 h-3.5" />
+                              <Share2 className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
@@ -242,13 +243,13 @@ function App() {
                   ))}
                 </div>
 
-                <div className="text-center py-12 border-t border-[#f0f0f0]">
-                  <p className="text-[#666666] text-[14px] mb-6 max-w-[500px] mx-auto">
-                    {images[0]?.prompt}
+                <div className="text-center py-16 border-t border-[#1a1a1a]">
+                  <p className="text-[#666666] text-[14px] mb-8 max-w-[600px] mx-auto italic">
+                    "{images[0]?.prompt}"
                   </p>
                   <button
                     onClick={() => handleRemix(images[0]?.prompt)}
-                    className="inline-flex items-center gap-2 text-[13px] font-medium text-black hover:text-[#666666] transition-colors"
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-white hover:text-[#999999] transition-colors"
                   >
                     <Repeat2 className="w-4 h-4" />
                     Remix this scene
@@ -258,29 +259,30 @@ function App() {
             )}
           </>
         ) : (
-          /* Trending - Clean list */
-          <div className="max-w-[1200px] mx-auto px-8">
-            <h2 className="text-[56px] leading-[1.1] font-semibold text-black mb-16 tracking-tight">
+          /* Trending - A24 dark gallery list */
+          <div className="max-w-[1400px] mx-auto px-8">
+            <h2 className="text-[72px] leading-[1.05] font-light text-white mb-24 tracking-tight text-center">
               Trending Scenes
             </h2>
 
-            <div className="max-w-[800px] space-y-8">
+            <div className="max-w-[900px] mx-auto space-y-12">
               {TRENDING_SCENES.map((scene, i) => (
                 <div
                   key={i}
-                  className="pb-8 border-b border-[#f0f0f0] last:border-0 cursor-pointer group"
+                  className="pb-12 border-b border-[#1a1a1a] last:border-0 cursor-pointer group progressive-blur"
                   onClick={() => handleRemix(scene.prompt)}
+                  style={{ animationDelay: `${i * 100}ms` }}
                 >
-                  <div className="flex justify-between gap-8 mb-3">
-                    <p className="text-[18px] leading-relaxed text-black group-hover:text-[#666666] transition-colors flex-1">
+                  <div className="flex justify-between gap-12 mb-4">
+                    <p className="text-[20px] leading-relaxed text-white group-hover:text-[#999999] transition-colors flex-1">
                       {scene.prompt}
                     </p>
-                    <button className="flex items-center gap-2 text-[12px] font-medium text-[#666666] group-hover:text-black transition-colors whitespace-nowrap">
-                      <Repeat2 className="w-3.5 h-3.5" />
+                    <button className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[#666666] group-hover:text-white transition-colors whitespace-nowrap">
+                      <Repeat2 className="w-4 h-4" />
                       Remix
                     </button>
                   </div>
-                  <p className="text-[12px] text-[#999999]">
+                  <p className="text-[12px] text-[#555555]">
                     {scene.count} variations
                   </p>
                 </div>
@@ -290,9 +292,9 @@ function App() {
         )}
       </main>
 
-      <footer className="border-t border-[#e0e0e0] py-8 mt-24">
-        <div className="max-w-[1200px] mx-auto px-8">
-          <p className="text-[11px] text-[#999999] font-medium">
+      <footer className="border-t border-[#1a1a1a] py-12 mt-32">
+        <div className="max-w-[1400px] mx-auto px-8 text-center">
+          <p className="text-[10px] text-[#555555] font-medium uppercase tracking-widest">
             CineBox — Renaise Kim
           </p>
         </div>
