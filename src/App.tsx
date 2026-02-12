@@ -142,53 +142,57 @@ function App() {
         </div>
       </header>
 
-      <main className="progressive-blur">
+      <main className="progressive-blur relative">
         {!showTrending ? (
           <>
-            {/* Hero - Monologue-inspired dramatic spacing */}
-            <div className="min-h-[80vh] flex items-center justify-center px-8 py-40">
-              <div className="max-w-[900px] mx-auto text-center">
-                <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-medium text-white mb-12 tracking-[-0.03em]">
+            {/* Hero with textbox above the fold */}
+            <div className="min-h-screen flex items-center justify-center px-8 py-20 relative">
+              {/* A24 Background */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                <h1 className="text-[280px] md:text-[420px] font-medium text-white/[0.03] tracking-[-0.05em] select-none">
+                  A24
+                </h1>
+              </div>
+
+              {/* Content */}
+              <div className="max-w-[720px] mx-auto w-full relative z-10">
+                <h2 className="text-[48px] md:text-[64px] leading-[0.95] font-medium text-white mb-8 tracking-[-0.03em] text-center">
                   Cinematic moments as art
                 </h2>
-                <p className="text-[17px] md:text-[19px] leading-[1.7] text-[#999999] max-w-[600px] mx-auto font-normal tracking-[0.01em]">
+                <p className="text-[16px] md:text-[17px] leading-[1.7] text-[#999999] max-w-[500px] mx-auto font-normal tracking-[0.01em] mb-12 text-center">
                   A curated archive of film scenes. Discover, collect, and display iconic moments from cinema's finest.
                 </p>
-              </div>
-            </div>
 
-            {/* Input - Monologue generous spacing */}
-            <div className="max-w-[1200px] mx-auto px-8 mb-60">
-              <div className="max-w-[720px] mx-auto">
-                <textarea
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="Describe a scene..."
-                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-[12px] px-6 py-5 text-[16px] font-normal text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
-                  disabled={isGenerating}
-                />
+                {/* Input box above the fold */}
+                  <textarea
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder="Describe a scene..."
+                    className="w-full h-[140px] bg-[#0a0a0a]/80 border border-[#1a1a1a] rounded-[12px] px-6 py-5 text-[16px] font-normal text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur-xl"
+                    disabled={isGenerating}
+                  />
 
-                <button
-                  ref={buttonRef}
-                  onClick={() => generateMoodBoard()}
-                  disabled={isGenerating || !prompt.trim()}
-                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.15em] rounded-[12px] hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  {isGenerating ? (
-                    <span className="flex items-center justify-center gap-3">
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Generating
-                    </span>
-                  ) : (
-                    'Generate Mood Board'
-                  )}
-                </button>
+                  <button
+                    ref={buttonRef}
+                    onClick={() => generateMoodBoard()}
+                    disabled={isGenerating || !prompt.trim()}
+                    className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.15em] rounded-[12px] hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    {isGenerating ? (
+                      <span className="flex items-center justify-center gap-3">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Generating
+                      </span>
+                    ) : (
+                      'Generate Mood Board'
+                    )}
+                  </button>
               </div>
             </div>
 
             {error && (
-              <div className="max-w-[1400px] mx-auto px-8 mb-20">
-                <div className="max-w-[800px] mx-auto p-5 bg-red-900/20 border border-red-800/50 rounded-sm text-red-400 text-[14px] backdrop-blur">
+              <div className="max-w-[1200px] mx-auto px-8 mb-20">
+                <div className="max-w-[720px] mx-auto p-5 bg-red-900/20 border border-red-800/50 rounded-[12px] text-red-400 text-[14px] backdrop-blur">
                   {error}
                 </div>
               </div>
