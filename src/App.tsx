@@ -125,9 +125,11 @@ function App() {
       <header className="border-b border-[#1a1a1a] bg-black backdrop-blur">
         <div className="max-w-[1400px] mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-[13px] font-semibold tracking-wide text-white uppercase">
-              CineBox
-            </h1>
+            <img
+              src="/cinebox-logo.svg"
+              alt="CineBox"
+              className="h-5 opacity-90 hover:opacity-100 transition-opacity"
+            />
             <nav className="flex gap-8">
               <button
                 onClick={() => setShowTrending(false)}
