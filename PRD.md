@@ -253,13 +253,22 @@ Collection {
 - **Official A24 archive access** (master shot list)
 - License high-res stills from entire catalog
 - Co-branded "A24 x CineBox" positioning
-- Revenue share: 70/30 split (A24/CineBox)
+- Revenue share:
+  - Digital: 70/30 split (A24/CineBox)
+  - **Physical prints: 60/40 split** (A24/CineBox)
 - A24 retains all IP rights to scenes
 
 **Value Exchange:**
 - CineBox: Gets exclusive access to A24 archive
-- A24: Gets new revenue stream + catalog discovery engine
-- Users: Access to official, high-quality A24 scenes
+- A24: Gets new revenue stream (digital + print sales) + catalog discovery
+- Users: Access to official A24 scenes (digital display + physical prints)
+
+**Print Commerce Integration:**
+- Users can order museum-quality prints of any scene
+- Shipped directly from print partner (Printful, Gelato)
+- Frames available (match Samsung Frame aesthetic)
+- Limited editions signed by DPs (premium tier)
+- A24 x CineBox co-branded packaging
 
 ### 7.2 Samsung Frame TV Integration
 **Distribution Partnership**
@@ -341,11 +350,15 @@ Collection {
 - [ ] Desktop screensaver
 - [ ] Official A24 scene library
 
-### V5 - Monetization
+### V5 - Print Commerce
+- [ ] **Print-to-purchase**: Order physical prints of any scene
+- [ ] Multiple sizes (8x10, 16x20, 24x36)
+- [ ] Framing options (black mat, white mat, walnut frame)
+- [ ] Museum-quality archival paper
+- [ ] Limited editions (signed by DP)
 - [ ] Premium A24 scenes library
-- [ ] Physical print marketplace
 - [ ] Custom framing service
-- [ ] Director commentary on scenes
+- [ ] Certificate of authenticity
 
 ---
 
