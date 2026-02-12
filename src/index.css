@@ -80,10 +80,15 @@ body {
   animation: fadeBlur 0.8s ease-out;
 }
 
-/* Clean, high-contrast typography */
+/* A24-style typography - light, refined */
 h1, h2, h3 {
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+/* Body text lighter */
+body {
+  font-weight: 300;
 }
 
 /* Clean grid - consistent, organized */

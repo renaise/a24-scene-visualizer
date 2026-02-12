@@ -125,29 +125,17 @@ function App() {
       <header className="border-b border-[#1a1a1a] bg-black backdrop-blur">
         <div className="max-w-[1400px] mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
-            <img
-              src="/cinebox-logo.svg"
-              alt="CineBox"
-              className="h-5 opacity-90 hover:opacity-100 transition-opacity"
-            />
-            <nav className="flex gap-8">
-              <button
-                onClick={() => setShowTrending(false)}
-                className={`text-[12px] font-medium uppercase tracking-wider transition-colors ${
-                  !showTrending ? 'text-white' : 'text-[#666666]'
-                }`}
-              >
-                Create
-              </button>
-              <button
-                onClick={() => setShowTrending(true)}
-                className={`text-[12px] font-medium uppercase tracking-wider transition-colors ${
-                  showTrending ? 'text-white' : 'text-[#666666]'
-                }`}
-              >
-                Trending
-              </button>
-            </nav>
+            <h1 className="text-[13px] font-light tracking-[0.2em] text-white uppercase">
+              Renaise
+            </h1>
+            <a
+              href="https://renaise.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-light tracking-[0.15em] text-[#666666] hover:text-white transition-colors uppercase"
+            >
+              renaise.com
+            </a>
           </div>
         </div>
       </header>
@@ -157,11 +145,11 @@ function App() {
           <>
             {/* Hero - A24 dark gallery style */}
             <div className="max-w-[1400px] mx-auto px-8 mb-24 text-center">
-              <h2 className="text-[72px] leading-[1.05] font-light text-white mb-8 tracking-tight">
-                Visualize your scene
+              <h2 className="text-[72px] leading-[1.05] font-light text-white mb-8 tracking-[-0.02em]">
+                Cinematic moments as art
               </h2>
-              <p className="text-[15px] leading-relaxed text-[#999999] max-w-[650px] mx-auto">
-                Collaborative scene visualization with the framing of art mode. Transform cinematic moments into displayable art.
+              <p className="text-[15px] leading-relaxed text-[#999999] max-w-[650px] mx-auto font-light tracking-wide">
+                A curated archive of film scenes. Discover, collect, and display iconic moments from cinema's finest.
               </p>
             </div>
 
@@ -172,7 +160,7 @@ function App() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe a scene..."
-                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-sm px-6 py-5 text-[16px] text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
+                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-sm px-6 py-5 text-[16px] font-light text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
                   disabled={isGenerating}
                 />
 
@@ -180,7 +168,7 @@ function App() {
                   ref={buttonRef}
                   onClick={() => generateMoodBoard()}
                   disabled={isGenerating || !prompt.trim()}
-                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[12px] font-semibold uppercase tracking-widest rounded-sm hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-medium uppercase tracking-[0.15em] rounded-sm hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {isGenerating ? (
                     <span className="flex items-center justify-center gap-3">
@@ -261,10 +249,10 @@ function App() {
             )}
           </>
         ) : (
-          /* Trending - A24 dark gallery list */
+          /* Archive - A24 dark gallery list */
           <div className="max-w-[1400px] mx-auto px-8">
-            <h2 className="text-[72px] leading-[1.05] font-light text-white mb-24 tracking-tight text-center">
-              Trending Scenes
+            <h2 className="text-[72px] leading-[1.05] font-light text-white mb-24 tracking-[-0.02em] text-center">
+              Archive
             </h2>
 
             <div className="max-w-[900px] mx-auto space-y-12">
@@ -296,8 +284,8 @@ function App() {
 
       <footer className="border-t border-[#1a1a1a] py-12 mt-32">
         <div className="max-w-[1400px] mx-auto px-8 text-center">
-          <p className="text-[10px] text-[#555555] font-medium uppercase tracking-widest">
-            CineBox — Renaise Kim
+          <p className="text-[10px] text-[#555555] font-light uppercase tracking-[0.2em]">
+            Renaise
           </p>
         </div>
       </footer>
