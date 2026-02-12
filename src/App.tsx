@@ -121,31 +121,26 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      {/* Mouthwash-style header - minimal, editorial */}
-      <header className="border-b border-[#e5e5e5]">
-        <div className="max-w-[1600px] mx-auto px-12 py-8">
-          <div className="flex items-baseline justify-between">
-            <div>
-              <h1 className="text-[15px] font-normal tracking-tight text-[#1a1a1a] mb-1">
-                CineBox
-              </h1>
-              <p className="text-[13px] text-[#737373]">
-                Collaborative scene visualization
-              </p>
-            </div>
-            <nav className="flex gap-8">
+      {/* Clean header - renaise.github.io style */}
+      <header className="border-b border-[#e0e0e0] bg-white">
+        <div className="max-w-[1200px] mx-auto px-8 py-6">
+          <div className="flex items-center justify-between">
+            <h1 className="text-[14px] font-semibold tracking-tight text-black">
+              CineBox
+            </h1>
+            <nav className="flex gap-6">
               <button
                 onClick={() => setShowTrending(false)}
-                className={`text-[13px] tracking-wide transition-colors ${
-                  !showTrending ? 'text-[#1a1a1a]' : 'text-[#737373]'
+                className={`text-[13px] font-medium transition-colors ${
+                  !showTrending ? 'text-black' : 'text-[#666666]'
                 }`}
               >
                 Create
               </button>
               <button
                 onClick={() => setShowTrending(true)}
-                className={`text-[13px] tracking-wide transition-colors ${
-                  showTrending ? 'text-[#1a1a1a]' : 'text-[#737373]'
+                className={`text-[13px] font-medium transition-colors ${
+                  showTrending ? 'text-black' : 'text-[#666666]'
                 }`}
               >
                 Trending
@@ -155,27 +150,27 @@ function App() {
         </div>
       </header>
 
-      <main className="py-20">
+      <main className="py-16">
         {!showTrending ? (
           <>
-            {/* Hero - editorial spacing */}
-            <div className="max-w-[1200px] mx-auto px-12 mb-24">
-              <h2 className="text-[64px] leading-[1.05] font-light text-[#1a1a1a] mb-8 max-w-[900px]">
+            {/* Hero - clean, high contrast */}
+            <div className="max-w-[1200px] mx-auto px-8 mb-20">
+              <h2 className="text-[56px] leading-[1.1] font-semibold text-black mb-6 max-w-[800px] tracking-tight">
                 Visualize your scene
               </h2>
-              <p className="text-[18px] leading-relaxed text-[#737373] max-w-[600px]">
+              <p className="text-[16px] leading-relaxed text-[#666666] max-w-[500px]">
                 Transform a cinematic moment into a mood board. See how others interpret the same scene.
               </p>
             </div>
 
-            {/* Input - tactile */}
-            <div className="max-w-[1200px] mx-auto px-12 mb-32">
-              <div className="max-w-[800px]">
+            {/* Input - clean */}
+            <div className="max-w-[1200px] mx-auto px-8 mb-24">
+              <div className="max-w-[700px]">
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe a scene..."
-                  className="w-full h-[160px] bg-white border border-[#e5e5e5] rounded-lg px-6 py-5 text-[16px] text-[#1a1a1a] placeholder-[#a3a3a3] focus:outline-none focus:border-[#737373] resize-none transition-colors mb-4"
+                  className="w-full h-[140px] bg-white border border-[#e0e0e0] rounded-md px-5 py-4 text-[15px] text-black placeholder-[#999999] focus:outline-none focus:border-black resize-none transition-colors mb-4"
                   disabled={isGenerating}
                 />
 
@@ -183,10 +178,10 @@ function App() {
                   ref={buttonRef}
                   onClick={() => generateMoodBoard()}
                   disabled={isGenerating || !prompt.trim()}
-                  className="flashlight-button px-8 py-4 bg-[#1a1a1a] text-white text-[14px] font-medium tracking-wide rounded-lg hover:bg-[#2a2a2a] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="flashlight-button px-7 py-3.5 bg-black text-white text-[13px] font-semibold tracking-wide rounded-md hover:bg-[#333333] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {isGenerating ? (
-                    <span className="flex items-center gap-3">
+                    <span className="flex items-center gap-2.5">
                       <Loader2 className="w-4 h-4 animate-spin" />
                       Generating
                     </span>
@@ -198,47 +193,47 @@ function App() {
             </div>
 
             {error && (
-              <div className="max-w-[1200px] mx-auto px-12 mb-20">
-                <div className="max-w-[800px] p-5 bg-red-50 border border-red-200 rounded-lg text-red-700 text-[15px]">
+              <div className="max-w-[1200px] mx-auto px-8 mb-16">
+                <div className="max-w-[700px] p-4 bg-red-50 border border-red-200 rounded-md text-red-700 text-[14px]">
                   {error}
                 </div>
               </div>
             )}
 
-            {/* Images - Asymmetric Masonry Grid (Mouthwash style) */}
+            {/* Images - Clean Grid (renaise.github.io style) */}
             {images.length > 0 && (
-              <div className="max-w-[1600px] mx-auto px-12">
-                <div className="masonry-grid mb-20">
+              <div className="max-w-[1200px] mx-auto px-8">
+                <div className="image-grid mb-16">
                   {images.map((image, i) => (
                     <div
                       key={i}
-                      className={`masonry-item-${i + 1} image-frame aspect-[4/3] rounded-lg group relative`}
+                      className="image-frame aspect-video rounded-md group relative overflow-hidden"
                     >
                       <img
                         src={image.url}
                         alt={`Scene ${i + 1}`}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="absolute bottom-6 left-6 right-6">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute bottom-4 left-4 right-4">
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-3">
                               <button
                                 onClick={() => handleSave(image)}
-                                className="flex items-center gap-2 text-white/90 hover:text-white text-[12px] tracking-wide transition-colors"
+                                className="flex items-center gap-1.5 text-white/90 hover:text-white text-[11px] font-medium tracking-wide transition-colors"
                               >
-                                <Heart className="w-4 h-4" />
+                                <Heart className="w-3.5 h-3.5" />
                                 Save
                               </button>
-                              <span className="text-white/60 text-[12px]">
-                                {image.likes} likes
+                              <span className="text-white/60 text-[11px]">
+                                {image.likes}
                               </span>
                             </div>
                             <button
                               onClick={() => handleShare(image)}
                               className="text-white/90 hover:text-white transition-colors"
                             >
-                              <Share2 className="w-4 h-4" />
+                              <Share2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </div>
@@ -247,13 +242,13 @@ function App() {
                   ))}
                 </div>
 
-                <div className="text-center py-16 border-t border-[#e5e5e5]">
-                  <p className="text-[#737373] text-[15px] italic mb-8 max-w-[600px] mx-auto">
+                <div className="text-center py-12 border-t border-[#f0f0f0]">
+                  <p className="text-[#666666] text-[14px] mb-6 max-w-[500px] mx-auto">
                     {images[0]?.prompt}
                   </p>
                   <button
                     onClick={() => handleRemix(images[0]?.prompt)}
-                    className="editorial-link inline-flex items-center gap-2 text-[14px] text-[#1a1a1a] tracking-wide"
+                    className="inline-flex items-center gap-2 text-[13px] font-medium text-black hover:text-[#666666] transition-colors"
                   >
                     <Repeat2 className="w-4 h-4" />
                     Remix this scene
@@ -263,30 +258,30 @@ function App() {
             )}
           </>
         ) : (
-          /* Trending - Editorial list */
-          <div className="max-w-[1200px] mx-auto px-12">
-            <h2 className="text-[64px] leading-[1.05] font-light text-[#1a1a1a] mb-20">
+          /* Trending - Clean list */
+          <div className="max-w-[1200px] mx-auto px-8">
+            <h2 className="text-[56px] leading-[1.1] font-semibold text-black mb-16 tracking-tight">
               Trending Scenes
             </h2>
 
-            <div className="max-w-[900px] space-y-12">
+            <div className="max-w-[800px] space-y-8">
               {TRENDING_SCENES.map((scene, i) => (
                 <div
                   key={i}
-                  className="pb-12 border-b border-[#e5e5e5] last:border-0 cursor-pointer group"
+                  className="pb-8 border-b border-[#f0f0f0] last:border-0 cursor-pointer group"
                   onClick={() => handleRemix(scene.prompt)}
                 >
-                  <div className="flex justify-between gap-12 mb-4">
-                    <p className="text-[22px] leading-relaxed text-[#1a1a1a] group-hover:text-[#737373] transition-colors flex-1">
+                  <div className="flex justify-between gap-8 mb-3">
+                    <p className="text-[18px] leading-relaxed text-black group-hover:text-[#666666] transition-colors flex-1">
                       {scene.prompt}
                     </p>
-                    <button className="editorial-link flex items-center gap-2 text-[13px] text-[#737373] group-hover:text-[#1a1a1a] transition-colors whitespace-nowrap">
-                      <Repeat2 className="w-4 h-4" />
+                    <button className="flex items-center gap-2 text-[12px] font-medium text-[#666666] group-hover:text-black transition-colors whitespace-nowrap">
+                      <Repeat2 className="w-3.5 h-3.5" />
                       Remix
                     </button>
                   </div>
-                  <p className="text-[13px] text-[#a3a3a3] tracking-wide">
-                    {scene.count} variations created
+                  <p className="text-[12px] text-[#999999]">
+                    {scene.count} variations
                   </p>
                 </div>
               ))}
@@ -295,9 +290,9 @@ function App() {
         )}
       </main>
 
-      <footer className="border-t border-[#e5e5e5] py-12 mt-32">
-        <div className="max-w-[1600px] mx-auto px-12">
-          <p className="text-[12px] text-[#a3a3a3] tracking-wide">
+      <footer className="border-t border-[#e0e0e0] py-8 mt-24">
+        <div className="max-w-[1200px] mx-auto px-8">
+          <p className="text-[11px] text-[#999999] font-medium">
             CineBox — Renaise Kim
           </p>
         </div>
