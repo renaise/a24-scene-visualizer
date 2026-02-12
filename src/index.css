@@ -80,15 +80,15 @@ body {
   animation: fadeBlur 0.8s ease-out;
 }
 
-/* A24-style typography - light, refined */
+/* A24-style typography - bold, legible */
 h1, h2, h3 {
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
-/* Body text lighter */
+/* Body text - medium weight for readability */
 body {
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Monologue-inspired grid - generous spacing */

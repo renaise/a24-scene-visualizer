@@ -125,14 +125,16 @@ function App() {
       <header className="border-b border-[#1a1a1a] bg-black backdrop-blur">
         <div className="max-w-[1400px] mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-[13px] font-light tracking-[0.2em] text-white uppercase">
-              Renaise
-            </h1>
+            <img
+              src="/cinebox-logo.svg"
+              alt="Renaise"
+              className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
+            />
             <a
               href="https://renaise.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-light tracking-[0.15em] text-[#666666] hover:text-white transition-colors uppercase"
+              className="text-[11px] font-normal tracking-[0.15em] text-[#666666] hover:text-white transition-colors uppercase"
             >
               renaise.com
             </a>
@@ -146,10 +148,10 @@ function App() {
             {/* Hero - Monologue-inspired dramatic spacing */}
             <div className="min-h-[80vh] flex items-center justify-center px-8 py-40">
               <div className="max-w-[900px] mx-auto text-center">
-                <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-light text-white mb-12 tracking-[-0.03em]">
+                <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-medium text-white mb-12 tracking-[-0.03em]">
                   Cinematic moments as art
                 </h2>
-                <p className="text-[17px] md:text-[19px] leading-[1.7] text-[#999999] max-w-[600px] mx-auto font-light tracking-[0.01em]">
+                <p className="text-[17px] md:text-[19px] leading-[1.7] text-[#999999] max-w-[600px] mx-auto font-normal tracking-[0.01em]">
                   A curated archive of film scenes. Discover, collect, and display iconic moments from cinema's finest.
                 </p>
               </div>
@@ -162,7 +164,7 @@ function App() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe a scene..."
-                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-sm px-6 py-5 text-[16px] font-light text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
+                  className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-sm px-6 py-5 text-[16px] font-normal text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur"
                   disabled={isGenerating}
                 />
 
@@ -170,7 +172,7 @@ function App() {
                   ref={buttonRef}
                   onClick={() => generateMoodBoard()}
                   disabled={isGenerating || !prompt.trim()}
-                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-medium uppercase tracking-[0.15em] rounded-sm hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.15em] rounded-sm hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   {isGenerating ? (
                     <span className="flex items-center justify-center gap-3">
@@ -236,7 +238,7 @@ function App() {
                 </div>
 
                 <div className="text-center py-24 border-t border-[#1a1a1a]">
-                  <p className="text-[#666666] text-[16px] font-light mb-12 max-w-[700px] mx-auto italic leading-relaxed">
+                  <p className="text-[#666666] text-[16px] font-normal mb-12 max-w-[700px] mx-auto italic leading-relaxed">
                     "{images[0]?.prompt}"
                   </p>
                   <button
@@ -253,7 +255,7 @@ function App() {
         ) : (
           /* Archive - Monologue dramatic spacing */
           <div className="max-w-[1200px] mx-auto px-8 py-40">
-            <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-light text-white mb-40 tracking-[-0.03em] text-center">
+            <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-medium text-white mb-40 tracking-[-0.03em] text-center">
               Archive
             </h2>
 
@@ -286,7 +288,7 @@ function App() {
 
       <footer className="border-t border-[#1a1a1a] py-20 mt-60">
         <div className="max-w-[1200px] mx-auto px-8 text-center">
-          <p className="text-[11px] text-[#555555] font-light uppercase tracking-[0.25em]">
+          <p className="text-[11px] text-[#555555] font-normal uppercase tracking-[0.25em]">
             Renaise
           </p>
         </div>
