@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: 'Helvetica Neue', 'Helvetica', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --font-family-mono: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+
+  /* Editorial Color System */
+  --color-surface: #0a0a0a;
+  --color-surface-raised: #111111;
+  --color-text-primary: rgba(255, 255, 255, 0.88);
+  --color-text-secondary: rgba(255, 255, 255, 0.55);
+  --color-text-muted: rgba(255, 255, 255, 0.35);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* Editorial Typography */
+h1 {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* Glassmorphism - Subtle Editorial */
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+}
+
+/* Flashlight Effect - Signature Interaction */
+.flashlight-button {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --glow-opacity: 0;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.flashlight-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    100px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 60%
+  );
+  opacity: var(--glow-opacity);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.flashlight-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Editorial spacing utilities */
+.section-gap {
+  margin-bottom: 96px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .section-gap {
+    margin-bottom: 64px;
+  }
+}
