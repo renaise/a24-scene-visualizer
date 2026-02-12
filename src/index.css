@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --font-family-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  --font-family-sans: 'Helvetica Neue', 'Helvetica', -apple-system, sans-serif;
   --font-family-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
+
+  /* Mouthwash-inspired neutrals - warmer, softer */
+  --color-surface: #fafaf9;
+  --color-surface-raised: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #737373;
+  --color-border: #e5e5e5;
 }
 
 * {
@@ -11,26 +18,112 @@
 
 body {
   margin: 0;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-surface);
+  color: var(--color-text);
   font-family: var(--font-family-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #1a1a1a;
+  color: #fafaf9;
 }
 
-/* Flashlight Effect - Minimal */
+/* Grain texture overlay - tactile feel */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+/* Mouthwash editorial typography */
+h1, h2, h3 {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Asymmetric image grid - deliberately imperfect */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.masonry-item-1 {
+  grid-column: span 7;
+}
+
+.masonry-item-2 {
+  grid-column: span 5;
+}
+
+.masonry-item-3 {
+  grid-column: span 5;
+}
+
+.masonry-item-4 {
+  grid-column: span 7;
+}
+
+@media (max-width: 768px) {
+  .masonry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .masonry-item-1,
+  .masonry-item-2,
+  .masonry-item-3,
+  .masonry-item-4 {
+    grid-column: span 1;
+  }
+}
+
+/* Tactile image treatment */
+.image-frame {
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f4;
+}
+
+.image-frame img {
+  filter: contrast(1.02) saturate(0.95);
+  mix-blend-mode: multiply;
+}
+
+/* Editorial link style */
+.editorial-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.editorial-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+.editorial-link:hover::after {
+  opacity: 1;
+}
+
+/* Flashlight - subtle */
 .flashlight-button {
   --mouse-x: 50%;
   --mouse-y: 50%;
   --glow-opacity: 0;
   position: relative;
   overflow: hidden;
-  isolation: isolate;
 }
 
 .flashlight-button::after {
@@ -38,17 +131,11 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    120px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.15) 0%,
-    transparent 60%
+    140px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
   );
   opacity: var(--glow-opacity);
   transition: opacity 0.3s ease;
   pointer-events: none;
-  z-index: 0;
-}
-
-.flashlight-button > * {
-  position: relative;
-  z-index: 1;
 }

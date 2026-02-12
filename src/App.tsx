@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Loader2, Heart, Share2, Repeat2, TrendingUp } from 'lucide-react'
+import { Loader2, Heart, Share2, Repeat2 } from 'lucide-react'
 import './index.css'
 
 interface GeneratedImage {
@@ -37,7 +37,6 @@ function App() {
       const rect = button.getBoundingClientRect()
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
-
       button.style.setProperty('--mouse-x', `${x}px`)
       button.style.setProperty('--mouse-y', `${y}px`)
       button.style.setProperty('--glow-opacity', '1')
@@ -79,9 +78,7 @@ function App() {
         }),
       })
 
-      if (!response.ok) {
-        throw new Error('Failed to generate images')
-      }
+      if (!response.ok) throw new Error('Failed to generate images')
 
       const data = await response.json()
       const newImages = data.images.map((img: { url: string }) => ({
@@ -108,7 +105,6 @@ function App() {
     const saved = JSON.parse(localStorage.getItem('cinebox-saved') || '[]')
     saved.push(image)
     localStorage.setItem('cinebox-saved', JSON.stringify(saved))
-    alert('Saved to your collection!')
   }
 
   const handleShare = async (image: GeneratedImage) => {
@@ -120,114 +116,129 @@ function App() {
       })
     } else {
       navigator.clipboard.writeText(image.url)
-      alert('Link copied!')
     }
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Minimal Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/5">
-        <div className="max-w-[1400px] mx-auto px-8 py-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-[17px] font-medium tracking-tight text-black">
-              CineBox
-            </h1>
-            <button
-              onClick={() => setShowTrending(!showTrending)}
-              className="flex items-center gap-2 text-[15px] text-black/50 hover:text-black transition-colors"
-            >
-              <TrendingUp className="w-4 h-4" />
-              {showTrending ? 'Create' : 'Trending'}
-            </button>
+    <div className="min-h-screen">
+      {/* Mouthwash-style header - minimal, editorial */}
+      <header className="border-b border-[#e5e5e5]">
+        <div className="max-w-[1600px] mx-auto px-12 py-8">
+          <div className="flex items-baseline justify-between">
+            <div>
+              <h1 className="text-[15px] font-normal tracking-tight text-[#1a1a1a] mb-1">
+                CineBox
+              </h1>
+              <p className="text-[13px] text-[#737373]">
+                Collaborative scene visualization
+              </p>
+            </div>
+            <nav className="flex gap-8">
+              <button
+                onClick={() => setShowTrending(false)}
+                className={`text-[13px] tracking-wide transition-colors ${
+                  !showTrending ? 'text-[#1a1a1a]' : 'text-[#737373]'
+                }`}
+              >
+                Create
+              </button>
+              <button
+                onClick={() => setShowTrending(true)}
+                className={`text-[13px] tracking-wide transition-colors ${
+                  showTrending ? 'text-[#1a1a1a]' : 'text-[#737373]'
+                }`}
+              >
+                Trending
+              </button>
+            </nav>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="pt-32 pb-24">
+      <main className="py-20">
         {!showTrending ? (
           <>
-            {/* Hero - Clean and Spacious */}
-            <div className="max-w-[800px] mx-auto px-8 mb-20">
-              <h2 className="text-[56px] md:text-[72px] font-light tracking-tight text-black mb-6 leading-[0.95]">
+            {/* Hero - editorial spacing */}
+            <div className="max-w-[1200px] mx-auto px-12 mb-24">
+              <h2 className="text-[64px] leading-[1.05] font-light text-[#1a1a1a] mb-8 max-w-[900px]">
                 Visualize your scene
               </h2>
-              <p className="text-[19px] text-black/60 leading-relaxed max-w-[600px]">
-                Transform a moment into a cinematic mood board.
+              <p className="text-[18px] leading-relaxed text-[#737373] max-w-[600px]">
+                Transform a cinematic moment into a mood board. See how others interpret the same scene.
               </p>
             </div>
 
-            {/* Input - Minimal */}
-            <div className="max-w-[800px] mx-auto px-8 mb-32">
-              <textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Describe a scene..."
-                className="w-full h-[140px] bg-white border border-black/10 rounded-2xl px-6 py-5 text-[17px] text-black placeholder-black/30 focus:outline-none focus:border-black/30 resize-none transition-colors mb-4"
-                disabled={isGenerating}
-              />
+            {/* Input - tactile */}
+            <div className="max-w-[1200px] mx-auto px-12 mb-32">
+              <div className="max-w-[800px]">
+                <textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  placeholder="Describe a scene..."
+                  className="w-full h-[160px] bg-white border border-[#e5e5e5] rounded-lg px-6 py-5 text-[16px] text-[#1a1a1a] placeholder-[#a3a3a3] focus:outline-none focus:border-[#737373] resize-none transition-colors mb-4"
+                  disabled={isGenerating}
+                />
 
-              <button
-                ref={buttonRef}
-                onClick={() => generateMoodBoard()}
-                disabled={isGenerating || !prompt.trim()}
-                className="flashlight-button w-full py-5 rounded-2xl bg-black text-white text-[15px] font-medium hover:bg-black/90 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                {isGenerating ? (
-                  <span className="flex items-center justify-center gap-3">
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Generating
-                  </span>
-                ) : (
-                  'Generate'
-                )}
-              </button>
+                <button
+                  ref={buttonRef}
+                  onClick={() => generateMoodBoard()}
+                  disabled={isGenerating || !prompt.trim()}
+                  className="flashlight-button px-8 py-4 bg-[#1a1a1a] text-white text-[14px] font-medium tracking-wide rounded-lg hover:bg-[#2a2a2a] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  {isGenerating ? (
+                    <span className="flex items-center gap-3">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Generating
+                    </span>
+                  ) : (
+                    'Generate Mood Board'
+                  )}
+                </button>
+              </div>
             </div>
 
-            {/* Error */}
             {error && (
-              <div className="max-w-[800px] mx-auto px-8 mb-16">
-                <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-[15px]">
+              <div className="max-w-[1200px] mx-auto px-12 mb-20">
+                <div className="max-w-[800px] p-5 bg-red-50 border border-red-200 rounded-lg text-red-700 text-[15px]">
                   {error}
                 </div>
               </div>
             )}
 
-            {/* Images - Large Grid */}
+            {/* Images - Asymmetric Masonry Grid (Mouthwash style) */}
             {images.length > 0 && (
-              <div className="max-w-[1400px] mx-auto px-8">
-                <div className="grid grid-cols-2 gap-6 mb-12">
+              <div className="max-w-[1600px] mx-auto px-12">
+                <div className="masonry-grid mb-20">
                   {images.map((image, i) => (
                     <div
                       key={i}
-                      className="aspect-[16/10] rounded-2xl overflow-hidden group relative bg-black/5"
+                      className={`masonry-item-${i + 1} image-frame aspect-[4/3] rounded-lg group relative`}
                     >
                       <img
                         src={image.url}
                         alt={`Scene ${i + 1}`}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all">
-                        <div className="absolute bottom-6 left-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="absolute bottom-6 left-6 right-6">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-4">
                               <button
                                 onClick={() => handleSave(image)}
-                                className="flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur rounded-full text-[13px] font-medium text-black hover:bg-white transition-colors"
+                                className="flex items-center gap-2 text-white/90 hover:text-white text-[12px] tracking-wide transition-colors"
                               >
                                 <Heart className="w-4 h-4" />
                                 Save
                               </button>
-                              <span className="text-white/80 text-[13px] font-medium">
+                              <span className="text-white/60 text-[12px]">
                                 {image.likes} likes
                               </span>
                             </div>
                             <button
                               onClick={() => handleShare(image)}
-                              className="p-2 bg-white/90 backdrop-blur rounded-full hover:bg-white transition-colors"
+                              className="text-white/90 hover:text-white transition-colors"
                             >
-                              <Share2 className="w-4 h-4 text-black" />
+                              <Share2 className="w-4 h-4" />
                             </button>
                           </div>
                         </div>
@@ -236,13 +247,13 @@ function App() {
                   ))}
                 </div>
 
-                <div className="text-center py-12 border-t border-black/5">
-                  <p className="text-black/40 text-[15px] mb-6 italic">
-                    "{images[0]?.prompt}"
+                <div className="text-center py-16 border-t border-[#e5e5e5]">
+                  <p className="text-[#737373] text-[15px] italic mb-8 max-w-[600px] mx-auto">
+                    {images[0]?.prompt}
                   </p>
                   <button
                     onClick={() => handleRemix(images[0]?.prompt)}
-                    className="inline-flex items-center gap-2 text-[15px] text-black/50 hover:text-black transition-colors"
+                    className="editorial-link inline-flex items-center gap-2 text-[14px] text-[#1a1a1a] tracking-wide"
                   >
                     <Repeat2 className="w-4 h-4" />
                     Remix this scene
@@ -252,33 +263,31 @@ function App() {
             )}
           </>
         ) : (
-          /* Trending - Clean List */
-          <div className="max-w-[800px] mx-auto px-8">
-            <h2 className="text-[56px] md:text-[72px] font-light tracking-tight text-black mb-16 leading-[0.95]">
-              Trending
+          /* Trending - Editorial list */
+          <div className="max-w-[1200px] mx-auto px-12">
+            <h2 className="text-[64px] leading-[1.05] font-light text-[#1a1a1a] mb-20">
+              Trending Scenes
             </h2>
 
-            <div className="space-y-6">
+            <div className="max-w-[900px] space-y-12">
               {TRENDING_SCENES.map((scene, i) => (
                 <div
                   key={i}
-                  className="py-8 border-b border-black/5 cursor-pointer group"
+                  className="pb-12 border-b border-[#e5e5e5] last:border-0 cursor-pointer group"
                   onClick={() => handleRemix(scene.prompt)}
                 >
-                  <div className="flex items-start justify-between gap-8">
-                    <div className="flex-1">
-                      <p className="text-[19px] text-black mb-3 leading-relaxed group-hover:text-black/60 transition-colors">
-                        {scene.prompt}
-                      </p>
-                      <p className="text-[13px] text-black/40 font-medium">
-                        {scene.count} variations
-                      </p>
-                    </div>
-                    <button className="flex items-center gap-2 text-[15px] text-black/30 group-hover:text-black transition-colors mt-1">
+                  <div className="flex justify-between gap-12 mb-4">
+                    <p className="text-[22px] leading-relaxed text-[#1a1a1a] group-hover:text-[#737373] transition-colors flex-1">
+                      {scene.prompt}
+                    </p>
+                    <button className="editorial-link flex items-center gap-2 text-[13px] text-[#737373] group-hover:text-[#1a1a1a] transition-colors whitespace-nowrap">
                       <Repeat2 className="w-4 h-4" />
                       Remix
                     </button>
                   </div>
+                  <p className="text-[13px] text-[#a3a3a3] tracking-wide">
+                    {scene.count} variations created
+                  </p>
                 </div>
               ))}
             </div>
@@ -286,11 +295,10 @@ function App() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-black/5 py-8">
-        <div className="max-w-[1400px] mx-auto px-8 text-center">
-          <p className="text-[13px] text-black/30">
-            CineBox by Renaise Kim
+      <footer className="border-t border-[#e5e5e5] py-12 mt-32">
+        <div className="max-w-[1600px] mx-auto px-12">
+          <p className="text-[12px] text-[#a3a3a3] tracking-wide">
+            CineBox — Renaise Kim
           </p>
         </div>
       </footer>
