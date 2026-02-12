@@ -140,22 +140,24 @@ function App() {
         </div>
       </header>
 
-      <main className="py-20 progressive-blur">
+      <main className="progressive-blur">
         {!showTrending ? (
           <>
-            {/* Hero - A24 dark gallery style */}
-            <div className="max-w-[1400px] mx-auto px-8 mb-24 text-center">
-              <h2 className="text-[72px] leading-[1.05] font-light text-white mb-8 tracking-[-0.02em]">
-                Cinematic moments as art
-              </h2>
-              <p className="text-[15px] leading-relaxed text-[#999999] max-w-[650px] mx-auto font-light tracking-wide">
-                A curated archive of film scenes. Discover, collect, and display iconic moments from cinema's finest.
-              </p>
+            {/* Hero - Monologue-inspired dramatic spacing */}
+            <div className="min-h-[80vh] flex items-center justify-center px-8 py-40">
+              <div className="max-w-[900px] mx-auto text-center">
+                <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-light text-white mb-12 tracking-[-0.03em]">
+                  Cinematic moments as art
+                </h2>
+                <p className="text-[17px] md:text-[19px] leading-[1.7] text-[#999999] max-w-[600px] mx-auto font-light tracking-[0.01em]">
+                  A curated archive of film scenes. Discover, collect, and display iconic moments from cinema's finest.
+                </p>
+              </div>
             </div>
 
-            {/* Input - A24 dark style */}
-            <div className="max-w-[1400px] mx-auto px-8 mb-32">
-              <div className="max-w-[800px] mx-auto">
+            {/* Input - Monologue generous spacing */}
+            <div className="max-w-[1200px] mx-auto px-8 mb-60">
+              <div className="max-w-[720px] mx-auto">
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
@@ -190,10 +192,10 @@ function App() {
               </div>
             )}
 
-            {/* Images - A24 Gallery Grid with Progressive Blur */}
+            {/* Images - Monologue cinematic grid */}
             {images.length > 0 && (
-              <div className="max-w-[1400px] mx-auto px-8 section-blur">
-                <div className="image-grid mb-20">
+              <div className="max-w-[1200px] mx-auto px-8 section-blur mb-60">
+                <div className="image-grid mb-32">
                   {images.map((image, i) => (
                     <div
                       key={i}
@@ -233,8 +235,8 @@ function App() {
                   ))}
                 </div>
 
-                <div className="text-center py-16 border-t border-[#1a1a1a]">
-                  <p className="text-[#666666] text-[14px] mb-8 max-w-[600px] mx-auto italic">
+                <div className="text-center py-24 border-t border-[#1a1a1a]">
+                  <p className="text-[#666666] text-[16px] font-light mb-12 max-w-[700px] mx-auto italic leading-relaxed">
                     "{images[0]?.prompt}"
                   </p>
                   <button
@@ -249,13 +251,13 @@ function App() {
             )}
           </>
         ) : (
-          /* Archive - A24 dark gallery list */
-          <div className="max-w-[1400px] mx-auto px-8">
-            <h2 className="text-[72px] leading-[1.05] font-light text-white mb-24 tracking-[-0.02em] text-center">
+          /* Archive - Monologue dramatic spacing */
+          <div className="max-w-[1200px] mx-auto px-8 py-40">
+            <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-light text-white mb-40 tracking-[-0.03em] text-center">
               Archive
             </h2>
 
-            <div className="max-w-[900px] mx-auto space-y-12">
+            <div className="max-w-[900px] mx-auto space-y-20">
               {TRENDING_SCENES.map((scene, i) => (
                 <div
                   key={i}
@@ -282,9 +284,9 @@ function App() {
         )}
       </main>
 
-      <footer className="border-t border-[#1a1a1a] py-12 mt-32">
-        <div className="max-w-[1400px] mx-auto px-8 text-center">
-          <p className="text-[10px] text-[#555555] font-light uppercase tracking-[0.2em]">
+      <footer className="border-t border-[#1a1a1a] py-20 mt-60">
+        <div className="max-w-[1200px] mx-auto px-8 text-center">
+          <p className="text-[11px] text-[#555555] font-light uppercase tracking-[0.25em]">
             Renaise
           </p>
         </div>
