@@ -147,10 +147,10 @@ function App() {
           <>
             {/* Hero with textbox above the fold */}
             <div className="min-h-screen flex items-center justify-center px-8 py-20 relative">
-              {/* A24 Background */}
+              {/* CineBox Background */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                <h1 className="text-[280px] md:text-[420px] font-medium text-white/[0.03] tracking-[-0.05em] select-none">
-                  A24
+                <h1 className="text-[200px] md:text-[320px] font-medium text-white/[0.03] tracking-[-0.05em] select-none">
+                  CineBox
                 </h1>
               </div>
 
