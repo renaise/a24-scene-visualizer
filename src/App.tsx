@@ -28,14 +28,20 @@ function App() {
                 alt="CineBox"
                 className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
               />
-              <a
-                href="https://a24-scene-visualizer.pages.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
-              >
-                cinebox.pages.dev
-              </a>
+              <div className="flex items-center gap-6">
+                <a
+                  href="mailto:developer@codexfoundry.com"
+                  className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
+                >
+                  Contact
+                </a>
+                <a
+                  href="#"
+                  className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
+                >
+                  Login
+                </a>
+              </div>
             </div>
           </div>
         </header>
@@ -89,6 +95,13 @@ function App() {
             </button>
           </div>
         </main>
+
+        {/* Footer */}
+        <footer className="py-8 text-center border-t border-[#1a1a1a]">
+          <p className="text-[10px] font-normal tracking-[0.15em] text-[#666666] uppercase">
+            Made by Renaise 2026 ©
+          </p>
+        </footer>
       </div>
     )
   }
@@ -216,6 +229,13 @@ function App() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Footer */}
+      <div className="h-[52px] bg-[#0a0a0a] border-t border-[#1a1a1a] flex items-center justify-center flex-shrink-0">
+        <p className="text-[10px] font-normal tracking-[0.15em] text-[#666666] uppercase">
+          Made by Renaise 2026 ©
+        </p>
       </div>
     </div>
   )
