@@ -29,12 +29,12 @@ function App() {
                 className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
               />
               <a
-                href="https://renaise.com"
+                href="https://cinebox.pages.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
               >
-                renaise.com
+                cinebox.pages.dev
               </a>
             </div>
           </div>
@@ -49,12 +49,16 @@ function App() {
             muted
             playsInline
             className="bg-video"
-            src="https://player.vimeo.com/external/545723006.hd.mp4?s=4c4e1c6a4f3c5d6e7f8g9h0i1j2k3l4&profile_id=175"
-          />
+          >
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+          </video>
+
+          {/* Video Overlay */}
+          <div className="bg-video-overlay"></div>
 
           {/* CineBox Background Watermark */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-[0.02]">
-            <h1 className="text-[280px] md:text-[400px] font-bold text-white tracking-[-0.05em] select-none">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-[0.02] z-10">
+            <h1 className="text-[280px] md:text-[400px] font-medium text-white tracking-[-0.05em] select-none">
               CineBox
             </h1>
           </div>

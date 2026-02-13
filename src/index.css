@@ -34,16 +34,16 @@
 }
 
 @theme {
-  --font-family-sans: 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-family-sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   --font-family-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
 
-  /* A24 Films - dark, high contrast gallery */
-  --color-surface: #000000;
-  --color-surface-secondary: #0a0a0a;
-  --color-text: #ffffff;
-  --color-text-muted: #999999;
-  --color-border: #1a1a1a;
-  --color-border-light: #151515;
+  /* A24 Films: pure black & white, stark minimalism */
+  --color-surface: rgb(0, 0, 0);
+  --color-surface-secondary: rgb(10, 10, 10);
+  --color-text: rgb(255, 255, 255);
+  --color-text-muted: rgba(255, 255, 255, 0.6);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -80,34 +80,41 @@ body {
   animation: fadeBlur 0.8s ease-out;
 }
 
-/* A24-style typography - bold, legible */
+/* A24 Films typography - clean, minimal, readable */
 h1, h2, h3 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-/* Body text - medium weight for readability */
-body {
   font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-/* Monologue-inspired grid - generous spacing */
+/* Body text - clean and legible */
+body {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Monologue spacing rhythm - 10px increments, large gaps */
 .image-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 48px;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 810px) {
   .image-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 20px;
   }
 }
 
 @media (min-width: 1024px) {
   .image-grid {
-    gap: 64px;
+    gap: 150px;
   }
 }
 
@@ -197,28 +204,42 @@ body {
   pointer-events: none;
 }
 
-/* Frosted glass button */
+/* Frosted glass button - Monologue-inspired subtle hover */
 .glass-button {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-button:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
-/* Background video */
+/* Background video - A24 aesthetic */
 .bg-video {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0.15;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(2px);
+}
+
+.bg-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
   pointer-events: none;
 }
