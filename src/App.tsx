@@ -146,9 +146,24 @@ function App() {
         {!showTrending ? (
           <>
             {/* Hero with textbox above the fold */}
-            <div className="min-h-screen flex items-center justify-center px-8 py-20 relative">
-              {/* CineBox Background */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+            <div className="min-h-screen flex items-center justify-center px-8 py-20 relative overflow-hidden">
+              {/* Video Background - A24 Film Loop */}
+              <div className="absolute inset-0 z-0">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover opacity-20"
+                >
+                  <source src="/video/a24-archive.mp4" type="video/mp4" />
+                </video>
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+              </div>
+
+              {/* CineBox Background Watermark */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[1]">
                 <h1 className="text-[200px] md:text-[320px] font-medium text-white/[0.03] tracking-[-0.05em] select-none">
                   CineBox
                 </h1>
