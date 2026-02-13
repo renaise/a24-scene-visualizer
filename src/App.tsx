@@ -126,12 +126,83 @@ const CATEGORIES: Category[] = [
 ]
 
 function App() {
+  const [view, setView] = useState<'home' | 'gallery'>('home')
+  const [prompt, setPrompt] = useState('')
   const [currentSceneId, setCurrentSceneId] = useState(SCENES[0].id)
   const [selectedCategory, setSelectedCategory] = useState('editorial')
 
   const currentScene = SCENES.find(s => s.id === currentSceneId) || SCENES[0]
   const filteredScenes = SCENES.filter(s => s.category === selectedCategory)
 
+  const handleEnterGallery = () => {
+    setView('gallery')
+  }
+
+  if (view === 'home') {
+    return (
+      <div className="min-h-screen bg-black flex flex-col">
+        {/* Header */}
+        <header className="border-b border-[#1a1a1a] bg-black">
+          <div className="max-w-[1400px] mx-auto px-8 py-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
+                </svg>
+                <span className="text-[13px] font-medium text-white tracking-wider">CINEBOX</span>
+              </div>
+              <a
+                href="https://renaise.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
+              >
+                renaise.com
+              </a>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero */}
+        <main className="flex-1 flex items-center justify-center px-8 py-20 relative overflow-hidden">
+          {/* CineBox Background Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-[0.02]">
+            <h1 className="text-[280px] md:text-[400px] font-medium text-white tracking-[-0.05em] select-none">
+              CineBox
+            </h1>
+          </div>
+
+          {/* Content */}
+          <div className="max-w-[740px] mx-auto w-full relative z-10">
+            <h2 className="text-[56px] md:text-[72px] leading-[1.0] font-normal text-white mb-6 tracking-[-0.02em] text-center">
+              Every frame a gallery
+            </h2>
+            <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#888888] max-w-[620px] mx-auto font-light tracking-[0.01em] mb-16 text-center">
+              Browse cinema's most striking scenes. Build your collection. Transform your space into a living archive.
+            </p>
+
+            {/* Input */}
+            <textarea
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              placeholder="Describe a scene..."
+              className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-lg px-6 py-5 text-[15px] font-light text-white placeholder-[#444444] focus:outline-none focus:border-[#2a2a2a] resize-none transition-all mb-4"
+            />
+
+            {/* Button */}
+            <button
+              onClick={handleEnterGallery}
+              className="w-full px-8 py-5 bg-[#2a2a2a] text-white text-[11px] font-medium uppercase tracking-[0.2em] rounded-lg hover:bg-[#333333] transition-all"
+            >
+              Generate Mood Board
+            </button>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  // Gallery View
   return (
     <div className="h-screen bg-[#0a0a0a] flex flex-col overflow-hidden">
       {/* macOS-style window chrome */}
@@ -148,7 +219,10 @@ function App() {
         {/* Left Sidebar - Categories */}
         <div className="w-[240px] bg-[#0a0a0a] border-r border-[#1a1a1a] flex-shrink-0 flex flex-col">
           {/* Back button */}
-          <button className="flex items-center gap-2 px-6 py-5 text-[11px] text-[#666] hover:text-white transition-colors border-b border-[#1a1a1a]">
+          <button
+            onClick={() => setView('home')}
+            className="flex items-center gap-2 px-6 py-5 text-[11px] text-[#666] hover:text-white transition-colors border-b border-[#1a1a1a]"
+          >
             <ChevronLeft className="w-3 h-3" />
             <span className="uppercase tracking-wider">Back to Overview</span>
           </button>
