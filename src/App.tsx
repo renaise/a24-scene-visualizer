@@ -1,138 +1,16 @@
 import { useState } from 'react'
 import { Menu, ChevronLeft } from 'lucide-react'
 import './index.css'
-
-interface Scene {
-  id: string
-  url: string
-  film: string
-  timestamp: string
-  director: string
-  category: string
-}
-
-interface Category {
-  name: string
-  count: number
-  slug: string
-}
-
-// A24 Film Scenes
-const SCENES: Scene[] = [
-  {
-    id: '1',
-    url: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1600&h=900&fit=crop',
-    film: 'Moonlight',
-    timestamp: '00:23:45',
-    director: 'Barry Jenkins',
-    category: 'editorial'
-  },
-  {
-    id: '2',
-    url: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1600&h=900&fit=crop',
-    film: 'Hereditary',
-    timestamp: '01:12:33',
-    director: 'Ari Aster',
-    category: 'editorial'
-  },
-  {
-    id: '3',
-    url: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1600&h=900&fit=crop',
-    film: 'Midsommar',
-    timestamp: '00:45:12',
-    director: 'Ari Aster',
-    category: 'editorial'
-  },
-  {
-    id: '4',
-    url: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=1600&h=900&fit=crop',
-    film: 'The Lighthouse',
-    timestamp: '00:56:20',
-    director: 'Robert Eggers',
-    category: 'editorial'
-  },
-  {
-    id: '5',
-    url: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1600&h=900&fit=crop',
-    film: 'Everything Everywhere All at Once',
-    timestamp: '01:34:08',
-    director: 'Daniels',
-    category: 'editorial'
-  },
-  {
-    id: '6',
-    url: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1600&h=900&fit=crop',
-    film: 'Lady Bird',
-    timestamp: '00:18:42',
-    director: 'Greta Gerwig',
-    category: 'personal'
-  },
-  {
-    id: '7',
-    url: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&h=900&fit=crop',
-    film: 'The Witch',
-    timestamp: '00:32:15',
-    director: 'Robert Eggers',
-    category: 'editorial'
-  },
-  {
-    id: '8',
-    url: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=1600&h=900&fit=crop',
-    film: 'Uncut Gems',
-    timestamp: '01:05:30',
-    director: 'Safdie Brothers',
-    category: 'editorial'
-  },
-  {
-    id: '9',
-    url: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1600&h=900&fit=crop',
-    film: 'Ex Machina',
-    timestamp: '00:42:18',
-    director: 'Alex Garland',
-    category: 'editorial'
-  },
-  {
-    id: '10',
-    url: 'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1600&h=900&fit=crop',
-    film: 'The Florida Project',
-    timestamp: '00:28:50',
-    director: 'Sean Baker',
-    category: 'personal'
-  },
-  {
-    id: '11',
-    url: 'https://images.unsplash.com/photo-1506755855567-92ff770e8d00?w=1600&h=900&fit=crop',
-    film: 'A Ghost Story',
-    timestamp: '00:52:30',
-    director: 'David Lowery',
-    category: 'editorial'
-  },
-  {
-    id: '12',
-    url: 'https://images.unsplash.com/photo-1511576661531-b34d7da5d0bb?w=1600&h=900&fit=crop',
-    film: 'Eighth Grade',
-    timestamp: '00:15:22',
-    director: 'Bo Burnham',
-    category: 'personal'
-  }
-]
-
-const CATEGORIES: Category[] = [
-  { name: 'Daily life', count: 127, slug: 'daily' },
-  { name: 'Editorial', count: 8, slug: 'editorial' },
-  { name: 'Personal', count: 19, slug: 'personal' },
-  { name: 'Travel', count: 43, slug: 'travel' },
-  { name: 'Weddings', count: 25, slug: 'weddings' }
-]
+import { A24_SCENES, CATEGORIES } from './data/a24-scenes'
 
 function App() {
   const [view, setView] = useState<'home' | 'gallery'>('home')
   const [prompt, setPrompt] = useState('')
-  const [currentSceneId, setCurrentSceneId] = useState(SCENES[0].id)
+  const [currentSceneId, setCurrentSceneId] = useState(A24_SCENES[0].id)
   const [selectedCategory, setSelectedCategory] = useState('editorial')
 
-  const currentScene = SCENES.find(s => s.id === currentSceneId) || SCENES[0]
-  const filteredScenes = SCENES.filter(s => s.category === selectedCategory)
+  const currentScene = A24_SCENES.find(s => s.id === currentSceneId) || A24_SCENES[0]
+  const filteredScenes = A24_SCENES.filter(s => s.category === selectedCategory)
 
   const handleEnterGallery = () => {
     setView('gallery')
