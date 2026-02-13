@@ -29,7 +29,7 @@ function App() {
                 className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
               />
               <a
-                href="https://cinebox.pages.dev"
+                href="https://a24-scene-visualizer.pages.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
@@ -42,12 +42,15 @@ function App() {
 
         {/* Hero */}
         <main className="flex-1 flex items-center justify-center px-8 py-20 relative overflow-hidden">
-          {/* Background Video - YouTube Embed */}
-          <iframe
+          {/* Background Video - 15 second loop */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
             className="bg-video"
-            src="https://www.youtube.com/embed/-V83sCEy6N8?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&playlist=-V83sCEy6N8"
-            allow="autoplay; encrypted-media"
-            title="Background video"
+            src="/bg-video.mp4"
           />
 
           {/* Video Overlay */}
