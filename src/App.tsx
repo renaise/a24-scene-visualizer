@@ -42,15 +42,12 @@ function App() {
 
         {/* Hero */}
         <main className="flex-1 flex items-center justify-center px-8 py-20 relative overflow-hidden">
-          {/* Background Video */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
+          {/* Background Video - YouTube Embed */}
+          <iframe
             className="bg-video"
-            src="https://cdn.coverr.co/videos/coverr-cinematic-night-city-lights-4379/1080p.mp4"
+            src="https://www.youtube.com/embed/-V83sCEy6N8?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&playlist=-V83sCEy6N8"
+            allow="autoplay; encrypted-media"
+            title="Background video"
           />
 
           {/* Video Overlay */}
