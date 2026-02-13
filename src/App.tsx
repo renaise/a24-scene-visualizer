@@ -110,39 +110,15 @@ function App() {
   // Explore View
   return (
     <div className="h-screen bg-[#0a0a0a] flex flex-col overflow-hidden">
-      {/* Header - Exploration Controls */}
+      {/* Header */}
       <div className="h-[60px] glass-input border-b border-[rgba(255,255,255,0.1)] flex items-center px-8 flex-shrink-0">
         <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-8">
-            <img
-              src="/cinebox-logo.svg"
-              alt="CineBox"
-              className="h-[20px] cursor-pointer"
-              onClick={() => setView('home')}
-            />
-            <div className="flex items-center gap-2 bg-[rgba(255,255,255,0.05)] rounded-md p-1">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`px-4 py-1.5 text-[11px] font-medium uppercase tracking-wider transition-all rounded-sm ${
-                  viewMode === 'grid'
-                    ? 'bg-white text-black'
-                    : 'text-[#999] hover:text-white'
-                }`}
-              >
-                Grid
-              </button>
-              <button
-                onClick={() => setViewMode('cosmos')}
-                className={`px-4 py-1.5 text-[11px] font-medium uppercase tracking-wider transition-all rounded-sm ${
-                  viewMode === 'cosmos'
-                    ? 'bg-white text-black'
-                    : 'text-[#999] hover:text-white'
-                }`}
-              >
-                Cosmos
-              </button>
-            </div>
-          </div>
+          <img
+            src="/cinebox-logo.svg"
+            alt="CineBox"
+            className="h-[20px] cursor-pointer"
+            onClick={() => setView('home')}
+          />
           <div className="text-[11px] text-[#666] uppercase tracking-wider">
             {filteredScenes.length} Scenes • A24 Films
           </div>
@@ -298,6 +274,32 @@ function App() {
               </button>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Floating View Toggle - LAB/STAGE Style */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+        <div className="flex items-center gap-1 bg-[rgba(0,0,0,0.9)] backdrop-filter backdrop-blur-2xl rounded-full p-2 border border-[rgba(255,255,255,0.15)] shadow-2xl">
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`px-10 py-3.5 text-[14px] font-medium uppercase tracking-[0.2em] transition-all duration-300 rounded-full ${
+              viewMode === 'grid'
+                ? 'view-toggle-active text-white'
+                : 'text-[#666] hover:text-[#999]'
+            }`}
+          >
+            Grid
+          </button>
+          <button
+            onClick={() => setViewMode('cosmos')}
+            className={`px-10 py-3.5 text-[14px] font-medium uppercase tracking-[0.2em] transition-all duration-300 rounded-full ${
+              viewMode === 'cosmos'
+                ? 'view-toggle-active text-white'
+                : 'text-[#666] hover:text-[#999]'
+            }`}
+          >
+            Cosmos
+          </button>
         </div>
       </div>
 
