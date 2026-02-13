@@ -1,317 +1,257 @@
-import { useState, useEffect, useRef } from 'react'
-import { Loader2, Heart, Share2, Repeat2 } from 'lucide-react'
+import { useState } from 'react'
+import { Menu, ChevronLeft } from 'lucide-react'
 import './index.css'
 
-interface GeneratedImage {
+interface Scene {
+  id: string
   url: string
-  prompt: string
-  likes?: number
+  film: string
+  timestamp: string
+  director: string
+  category: string
 }
 
-interface TrendingScene {
-  prompt: string
+interface Category {
+  name: string
   count: number
+  slug: string
 }
 
-const TRENDING_SCENES: TrendingScene[] = [
-  { prompt: "A woman sits alone in a neon-lit laundromat at 3am, watching her clothes spin", count: 234 },
-  { prompt: "Two estranged brothers meet at their father's funeral in a small coastal town", count: 189 },
-  { prompt: "The last day of summer at a dying American mall", count: 156 },
-  { prompt: "A teenager discovers an old VHS tape in their grandmother's attic", count: 143 },
-  { prompt: "Rain falls on a forgotten motel off Route 66", count: 98 },
+// A24 Film Scenes
+const SCENES: Scene[] = [
+  {
+    id: '1',
+    url: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1600&h=900&fit=crop',
+    film: 'Moonlight',
+    timestamp: '00:23:45',
+    director: 'Barry Jenkins',
+    category: 'editorial'
+  },
+  {
+    id: '2',
+    url: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1600&h=900&fit=crop',
+    film: 'Hereditary',
+    timestamp: '01:12:33',
+    director: 'Ari Aster',
+    category: 'editorial'
+  },
+  {
+    id: '3',
+    url: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1600&h=900&fit=crop',
+    film: 'Midsommar',
+    timestamp: '00:45:12',
+    director: 'Ari Aster',
+    category: 'editorial'
+  },
+  {
+    id: '4',
+    url: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=1600&h=900&fit=crop',
+    film: 'The Lighthouse',
+    timestamp: '00:56:20',
+    director: 'Robert Eggers',
+    category: 'editorial'
+  },
+  {
+    id: '5',
+    url: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1600&h=900&fit=crop',
+    film: 'Everything Everywhere All at Once',
+    timestamp: '01:34:08',
+    director: 'Daniels',
+    category: 'editorial'
+  },
+  {
+    id: '6',
+    url: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1600&h=900&fit=crop',
+    film: 'Lady Bird',
+    timestamp: '00:18:42',
+    director: 'Greta Gerwig',
+    category: 'personal'
+  },
+  {
+    id: '7',
+    url: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&h=900&fit=crop',
+    film: 'The Witch',
+    timestamp: '00:32:15',
+    director: 'Robert Eggers',
+    category: 'editorial'
+  },
+  {
+    id: '8',
+    url: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=1600&h=900&fit=crop',
+    film: 'Uncut Gems',
+    timestamp: '01:05:30',
+    director: 'Safdie Brothers',
+    category: 'editorial'
+  },
+  {
+    id: '9',
+    url: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1600&h=900&fit=crop',
+    film: 'Ex Machina',
+    timestamp: '00:42:18',
+    director: 'Alex Garland',
+    category: 'editorial'
+  },
+  {
+    id: '10',
+    url: 'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=1600&h=900&fit=crop',
+    film: 'The Florida Project',
+    timestamp: '00:28:50',
+    director: 'Sean Baker',
+    category: 'personal'
+  },
+  {
+    id: '11',
+    url: 'https://images.unsplash.com/photo-1506755855567-92ff770e8d00?w=1600&h=900&fit=crop',
+    film: 'A Ghost Story',
+    timestamp: '00:52:30',
+    director: 'David Lowery',
+    category: 'editorial'
+  },
+  {
+    id: '12',
+    url: 'https://images.unsplash.com/photo-1511576661531-b34d7da5d0bb?w=1600&h=900&fit=crop',
+    film: 'Eighth Grade',
+    timestamp: '00:15:22',
+    director: 'Bo Burnham',
+    category: 'personal'
+  }
+]
+
+const CATEGORIES: Category[] = [
+  { name: 'Daily life', count: 127, slug: 'daily' },
+  { name: 'Editorial', count: 8, slug: 'editorial' },
+  { name: 'Personal', count: 19, slug: 'personal' },
+  { name: 'Travel', count: 43, slug: 'travel' },
+  { name: 'Weddings', count: 25, slug: 'weddings' }
 ]
 
 function App() {
-  const [prompt, setPrompt] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [images, setImages] = useState<GeneratedImage[]>([])
-  const [error, setError] = useState<string | null>(null)
-  const [showTrending, setShowTrending] = useState(false)
-  const buttonRef = useRef<HTMLButtonElement>(null)
+  const [currentSceneId, setCurrentSceneId] = useState(SCENES[0].id)
+  const [selectedCategory, setSelectedCategory] = useState('editorial')
 
-  useEffect(() => {
-    const button = buttonRef.current
-    if (!button) return
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = button.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      button.style.setProperty('--mouse-x', `${x}px`)
-      button.style.setProperty('--mouse-y', `${y}px`)
-      button.style.setProperty('--glow-opacity', '1')
-    }
-
-    const handleMouseLeave = () => {
-      button.style.setProperty('--glow-opacity', '0')
-    }
-
-    button.addEventListener('mousemove', handleMouseMove)
-    button.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      button.removeEventListener('mousemove', handleMouseMove)
-      button.removeEventListener('mouseleave', handleMouseLeave)
-    }
-  }, [])
-
-  const generateMoodBoard = async (customPrompt?: string) => {
-    const scenePrompt = customPrompt || prompt
-    if (!scenePrompt.trim()) return
-
-    setIsGenerating(true)
-    setError(null)
-    setShowTrending(false)
-
-    try {
-      const response = await fetch('https://fal.run/fal-ai/flux/schnell', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Key ${import.meta.env.VITE_FAL_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: `Cinematic film still, A24 movie aesthetic, ${scenePrompt}. Moody lighting, 35mm film grain, muted colors, contemplative atmosphere, indie film look, natural lighting, shallow depth of field`,
-          image_size: 'landscape_16_9',
-          num_images: 4,
-          enable_safety_checker: true,
-        }),
-      })
-
-      if (!response.ok) throw new Error('Failed to generate images')
-
-      const data = await response.json()
-      const newImages = data.images.map((img: { url: string }) => ({
-        url: img.url,
-        prompt: scenePrompt,
-        likes: Math.floor(Math.random() * 50)
-      }))
-
-      setImages(newImages)
-      setPrompt(scenePrompt)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong')
-    } finally {
-      setIsGenerating(false)
-    }
-  }
-
-  const handleRemix = (scenePrompt: string) => {
-    setPrompt(scenePrompt)
-    generateMoodBoard(scenePrompt)
-  }
-
-  const handleSave = (image: GeneratedImage) => {
-    const saved = JSON.parse(localStorage.getItem('cinebox-saved') || '[]')
-    saved.push(image)
-    localStorage.setItem('cinebox-saved', JSON.stringify(saved))
-  }
-
-  const handleShare = async (image: GeneratedImage) => {
-    if (navigator.share) {
-      await navigator.share({
-        title: 'CineBox Scene',
-        text: image.prompt,
-        url: image.url,
-      })
-    } else {
-      navigator.clipboard.writeText(image.url)
-    }
-  }
+  const currentScene = SCENES.find(s => s.id === currentSceneId) || SCENES[0]
+  const filteredScenes = SCENES.filter(s => s.category === selectedCategory)
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* A24 style header - dark, minimal */}
-      <header className="border-b border-[#1a1a1a] bg-black backdrop-blur">
-        <div className="max-w-[1400px] mx-auto px-8 py-6">
-          <div className="flex items-center justify-between">
+    <div className="h-screen bg-[#0a0a0a] flex flex-col overflow-hidden">
+      {/* macOS-style window chrome */}
+      <div className="h-[52px] bg-[#1a1a1a] border-b border-[#0a0a0a] flex items-center px-5 flex-shrink-0">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Sidebar - Categories */}
+        <div className="w-[240px] bg-[#0a0a0a] border-r border-[#1a1a1a] flex-shrink-0 flex flex-col">
+          {/* Back button */}
+          <button className="flex items-center gap-2 px-6 py-5 text-[11px] text-[#666] hover:text-white transition-colors border-b border-[#1a1a1a]">
+            <ChevronLeft className="w-3 h-3" />
+            <span className="uppercase tracking-wider">Back to Overview</span>
+          </button>
+
+          {/* Categories */}
+          <div className="flex-1 px-6 py-8 overflow-y-auto">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.slug}
+                onClick={() => setSelectedCategory(cat.slug)}
+                className={`w-full text-left py-2.5 text-[14px] transition-colors group ${
+                  selectedCategory === cat.slug
+                    ? 'text-white'
+                    : 'text-[#666] hover:text-white'
+                }`}
+              >
+                <span>{cat.name}</span>
+                {selectedCategory === cat.slug && (
+                  <span className="ml-2 text-[11px] bg-white text-black px-2 py-0.5 rounded-sm font-medium">
+                    {cat.count}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Center - Main Viewer */}
+        <div className="flex-1 bg-black relative flex items-center justify-center p-12">
+          {/* Top bar */}
+          <div className="absolute top-0 left-0 right-0 h-[80px] flex items-center justify-between px-12 z-20">
+            <div className="text-center flex-1">
+              <div className="text-[11px] text-[#666] uppercase tracking-wider mb-1">
+                {currentScene.director}
+              </div>
+              <div className="text-[10px] text-[#444] uppercase tracking-widest">
+                Photography
+              </div>
+            </div>
+            <button className="text-[#666] hover:text-white transition-colors">
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Corner brackets */}
+          <div className="absolute top-[100px] left-12 w-8 h-8 border-l-2 border-t-2 border-[#333] pointer-events-none z-10"></div>
+          <div className="absolute top-[100px] right-12 w-8 h-8 border-r-2 border-t-2 border-[#333] pointer-events-none z-10"></div>
+          <div className="absolute bottom-[100px] left-12 w-8 h-8 border-l-2 border-b-2 border-[#333] pointer-events-none z-10"></div>
+          <div className="absolute bottom-[100px] right-12 w-8 h-8 border-r-2 border-b-2 border-[#333] pointer-events-none z-10"></div>
+
+          {/* Main image */}
+          <div className="relative max-w-[70%] max-h-[70%] w-full">
             <img
-              src="/cinebox-logo.svg"
-              alt="Renaise"
-              className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
+              src={currentScene.url}
+              alt={currentScene.film}
+              className="w-full h-full object-contain"
             />
-            <a
-              href="https://renaise.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] font-normal tracking-[0.15em] text-[#666666] hover:text-white transition-colors uppercase"
-            >
-              renaise.com
-            </a>
           </div>
-        </div>
-      </header>
 
-      <main className="progressive-blur relative">
-        {!showTrending ? (
-          <>
-            {/* Hero with textbox above the fold */}
-            <div className="min-h-screen flex items-center justify-center px-8 py-20 relative overflow-hidden">
-              {/* Video Background - A24 Film Loop */}
-              <div className="absolute inset-0 z-0">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover opacity-20"
-                >
-                  <source src="/video/a24-archive.mp4" type="video/mp4" />
-                </video>
-                {/* Dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
-              </div>
-
-              {/* CineBox Background Watermark */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[1]">
-                <h1 className="text-[200px] md:text-[320px] font-medium text-white/[0.03] tracking-[-0.05em] select-none">
-                  CineBox
-                </h1>
-              </div>
-
-              {/* Content */}
-              <div className="max-w-[720px] mx-auto w-full relative z-10">
-                <h2 className="text-[48px] md:text-[64px] leading-[0.95] font-medium text-white mb-8 tracking-[-0.03em] text-center">
-                  Every frame a gallery
-                </h2>
-                <p className="text-[16px] md:text-[17px] leading-[1.7] text-[#999999] max-w-[540px] mx-auto font-normal tracking-[0.01em] mb-12 text-center">
-                  Browse cinema's most striking scenes. Build your collection. Transform your space into a living archive.
-                </p>
-
-                {/* Input box above the fold */}
-                  <textarea
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder="Describe a scene..."
-                    className="w-full h-[140px] bg-[#0a0a0a]/80 border border-[#1a1a1a] rounded-[12px] px-6 py-5 text-[16px] font-normal text-white placeholder-[#555555] focus:outline-none focus:border-[#333333] resize-none transition-all mb-6 backdrop-blur-xl"
-                    disabled={isGenerating}
-                  />
-
-                  <button
-                    ref={buttonRef}
-                    onClick={() => generateMoodBoard()}
-                    disabled={isGenerating || !prompt.trim()}
-                    className="w-full flashlight-button px-8 py-4 bg-white text-black text-[11px] font-semibold uppercase tracking-[0.15em] rounded-[12px] hover:bg-[#e0e0e0] transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                  >
-                    {isGenerating ? (
-                      <span className="flex items-center justify-center gap-3">
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Generating
-                      </span>
-                    ) : (
-                      'Generate Mood Board'
-                    )}
-                  </button>
-              </div>
+          {/* Bottom metadata */}
+          <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between z-20">
+            <div className="text-[11px] text-[#666]">
+              {currentScene.film} • {currentScene.timestamp}
             </div>
-
-            {error && (
-              <div className="max-w-[1200px] mx-auto px-8 mb-20">
-                <div className="max-w-[720px] mx-auto p-5 bg-red-900/20 border border-red-800/50 rounded-[12px] text-red-400 text-[14px] backdrop-blur">
-                  {error}
-                </div>
-              </div>
-            )}
-
-            {/* Images - Monologue cinematic grid */}
-            {images.length > 0 && (
-              <div className="max-w-[1200px] mx-auto px-8 section-blur mb-60">
-                <div className="image-grid mb-32">
-                  {images.map((image, i) => (
-                    <div
-                      key={i}
-                      className="image-frame aspect-[16/10] rounded-sm group relative overflow-hidden progressive-blur"
-                      style={{ animationDelay: `${i * 100}ms` }}
-                    >
-                      <img
-                        src={image.url}
-                        alt={`Scene ${i + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <div className="flex items-center justify-between backdrop-blur-sm bg-black/40 rounded-sm px-4 py-3">
-                            <div className="flex items-center gap-4">
-                              <button
-                                onClick={() => handleSave(image)}
-                                className="flex items-center gap-2 text-white/90 hover:text-white text-[11px] font-medium uppercase tracking-wider transition-colors"
-                              >
-                                <Heart className="w-4 h-4" />
-                                Save
-                              </button>
-                              <span className="text-white/60 text-[11px]">
-                                {image.likes}
-                              </span>
-                            </div>
-                            <button
-                              onClick={() => handleShare(image)}
-                              className="text-white/90 hover:text-white transition-colors"
-                            >
-                              <Share2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="text-center py-24 border-t border-[#1a1a1a]">
-                  <p className="text-[#666666] text-[16px] font-normal mb-12 max-w-[700px] mx-auto italic leading-relaxed">
-                    "{images[0]?.prompt}"
-                  </p>
-                  <button
-                    onClick={() => handleRemix(images[0]?.prompt)}
-                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-white hover:text-[#999999] transition-colors"
-                  >
-                    <Repeat2 className="w-4 h-4" />
-                    Remix this scene
-                  </button>
-                </div>
-              </div>
-            )}
-          </>
-        ) : (
-          /* Archive - Monologue dramatic spacing */
-          <div className="max-w-[1200px] mx-auto px-8 py-40">
-            <h2 className="text-[68px] md:text-[96px] leading-[0.95] font-medium text-white mb-40 tracking-[-0.03em] text-center">
-              Archive
-            </h2>
-
-            <div className="max-w-[900px] mx-auto space-y-20">
-              {TRENDING_SCENES.map((scene, i) => (
-                <div
-                  key={i}
-                  className="pb-12 border-b border-[#1a1a1a] last:border-0 cursor-pointer group progressive-blur"
-                  onClick={() => handleRemix(scene.prompt)}
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <div className="flex justify-between gap-12 mb-4">
-                    <p className="text-[20px] leading-relaxed text-white group-hover:text-[#999999] transition-colors flex-1">
-                      {scene.prompt}
-                    </p>
-                    <button className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[#666666] group-hover:text-white transition-colors whitespace-nowrap">
-                      <Repeat2 className="w-4 h-4" />
-                      Remix
-                    </button>
-                  </div>
-                  <p className="text-[12px] text-[#555555]">
-                    {scene.count} variations
-                  </p>
-                </div>
-              ))}
+            <div className="flex items-center gap-4 text-[10px] text-[#666]">
+              <button className="hover:text-white transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <button className="hover:text-white transition-colors flex items-center gap-1.5">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span className="text-[9px] uppercase tracking-wider">15</span>
+              </button>
             </div>
           </div>
-        )}
-      </main>
-
-      <footer className="border-t border-[#1a1a1a] py-20 mt-60">
-        <div className="max-w-[1200px] mx-auto px-8 text-center">
-          <p className="text-[11px] text-[#555555] font-normal uppercase tracking-[0.25em]">
-            Renaise
-          </p>
         </div>
-      </footer>
+
+        {/* Right Sidebar - Filmstrip */}
+        <div className="w-[180px] bg-[#0a0a0a] border-l border-[#1a1a1a] flex-shrink-0 overflow-y-auto py-6">
+          <div className="space-y-3 px-3">
+            {filteredScenes.map((scene) => (
+              <button
+                key={scene.id}
+                onClick={() => setCurrentSceneId(scene.id)}
+                className={`w-full aspect-[4/3] rounded-sm overflow-hidden transition-all ${
+                  scene.id === currentSceneId
+                    ? 'ring-2 ring-white ring-offset-2 ring-offset-[#0a0a0a]'
+                    : 'opacity-50 hover:opacity-100'
+                }`}
+              >
+                <img
+                  src={scene.url}
+                  alt={scene.film}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
