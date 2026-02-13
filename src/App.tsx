@@ -157,10 +157,10 @@ function App() {
               {/* Content */}
               <div className="max-w-[720px] mx-auto w-full relative z-10">
                 <h2 className="text-[48px] md:text-[64px] leading-[0.95] font-medium text-white mb-8 tracking-[-0.03em] text-center">
-                  Cinematic moments as art
+                  Every frame a gallery
                 </h2>
-                <p className="text-[16px] md:text-[17px] leading-[1.7] text-[#999999] max-w-[500px] mx-auto font-normal tracking-[0.01em] mb-12 text-center">
-                  A curated archive of film scenes. Discover, collect, and display iconic moments from cinema's finest.
+                <p className="text-[16px] md:text-[17px] leading-[1.7] text-[#999999] max-w-[540px] mx-auto font-normal tracking-[0.01em] mb-12 text-center">
+                  Browse cinema's most striking scenes. Build your collection. Transform your space into a living archive.
                 </p>
 
                 {/* Input box above the fold */}
