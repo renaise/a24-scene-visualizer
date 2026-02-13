@@ -42,19 +42,29 @@ function App() {
 
         {/* Hero */}
         <main className="flex-1 flex items-center justify-center px-8 py-20 relative overflow-hidden">
+          {/* Background Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="bg-video"
+            src="https://player.vimeo.com/external/545723006.hd.mp4?s=4c4e1c6a4f3c5d6e7f8g9h0i1j2k3l4&profile_id=175"
+          />
+
           {/* CineBox Background Watermark */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-[0.02]">
-            <h1 className="text-[280px] md:text-[400px] font-medium text-white tracking-[-0.05em] select-none">
+            <h1 className="text-[280px] md:text-[400px] font-bold text-white tracking-[-0.05em] select-none">
               CineBox
             </h1>
           </div>
 
           {/* Content */}
           <div className="max-w-[740px] mx-auto w-full relative z-10">
-            <h2 className="text-[56px] md:text-[72px] leading-[1.0] font-normal text-white mb-6 tracking-[-0.02em] text-center">
+            <h2 className="text-[56px] md:text-[72px] leading-[1.0] font-bold text-white mb-6 tracking-[-0.02em] text-center">
               Every frame a gallery
             </h2>
-            <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#888888] max-w-[620px] mx-auto font-light tracking-[0.01em] mb-16 text-center">
+            <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#cccccc] max-w-[620px] mx-auto font-medium tracking-[0.01em] mb-16 text-center">
               Browse cinema's most striking scenes. Build your collection. Transform your space into a living archive.
             </p>
 
@@ -63,13 +73,13 @@ function App() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Describe a scene..."
-              className="w-full h-[160px] bg-[#0a0a0a] border border-[#1a1a1a] rounded-lg px-6 py-5 text-[15px] font-light text-white placeholder-[#444444] focus:outline-none focus:border-[#2a2a2a] resize-none transition-all mb-4"
+              className="glass-button w-full h-[160px] px-6 py-5 text-[15px] font-medium text-white placeholder-[#666666] focus:outline-none focus:border-[rgba(255,255,255,0.2)] resize-none transition-all mb-4 rounded-lg"
             />
 
             {/* Button */}
             <button
               onClick={handleEnterGallery}
-              className="w-full px-8 py-5 bg-[#2a2a2a] text-white text-[11px] font-medium uppercase tracking-[0.2em] rounded-lg hover:bg-[#333333] transition-all"
+              className="glass-button flashlight-button w-full px-8 py-5 text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded-lg transition-all"
             >
               Generate Mood Board
             </button>
@@ -98,7 +108,7 @@ function App() {
           {/* Back button */}
           <button
             onClick={() => setView('home')}
-            className="flex items-center gap-2 px-6 py-5 text-[11px] text-[#666] hover:text-white transition-colors border-b border-[#1a1a1a]"
+            className="glass-button flex items-center gap-2 px-6 py-5 text-[11px] font-medium text-[#999] hover:text-white transition-colors border-b border-[#1a1a1a]"
           >
             <ChevronLeft className="w-3 h-3" />
             <span className="uppercase tracking-wider">Back to Overview</span>
@@ -110,10 +120,10 @@ function App() {
               <button
                 key={cat.slug}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`w-full text-left py-2.5 text-[14px] transition-colors group ${
+                className={`glass-button w-full text-left py-2.5 px-3 rounded-lg text-[14px] font-medium transition-all group ${
                   selectedCategory === cat.slug
                     ? 'text-white'
-                    : 'text-[#666] hover:text-white'
+                    : 'text-[#888] hover:text-white'
                 }`}
               >
                 <span>{cat.name}</span>
