@@ -48,10 +48,10 @@ function App() {
             loop
             muted
             playsInline
+            preload="auto"
             className="bg-video"
-          >
-            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
-          </video>
+            src="https://cdn.coverr.co/videos/coverr-cinematic-night-city-lights-4379/1080p.mp4"
+          />
 
           {/* Video Overlay */}
           <div className="bg-video-overlay"></div>
@@ -77,13 +77,13 @@ function App() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Describe a scene..."
-              className="glass-button w-full h-[160px] px-6 py-5 text-[15px] font-medium text-white placeholder-[#666666] focus:outline-none focus:border-[rgba(255,255,255,0.2)] resize-none transition-all mb-4 rounded-lg"
+              className="glass-input w-full h-[160px] px-6 py-5 text-[15px] font-normal text-white placeholder-[#666666] focus:outline-none resize-none mb-6 rounded-none"
             />
 
             {/* Button */}
             <button
               onClick={handleEnterGallery}
-              className="glass-button flashlight-button w-full px-8 py-5 text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded-lg transition-all"
+              className="monologue-button w-full rounded-none"
             >
               Generate Mood Board
             </button>
@@ -112,7 +112,7 @@ function App() {
           {/* Back button */}
           <button
             onClick={() => setView('home')}
-            className="glass-button flex items-center gap-2 px-6 py-5 text-[11px] font-medium text-[#999] hover:text-white transition-colors border-b border-[#1a1a1a]"
+            className="flex items-center gap-2 px-6 py-5 text-[11px] font-medium text-[#999] hover:text-white transition-colors border-b border-[#1a1a1a] bg-transparent"
           >
             <ChevronLeft className="w-3 h-3" />
             <span className="uppercase tracking-wider">Back to Overview</span>
@@ -124,10 +124,10 @@ function App() {
               <button
                 key={cat.slug}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`glass-button w-full text-left py-2.5 px-3 rounded-lg text-[14px] font-medium transition-all group ${
+                className={`w-full text-left py-3 px-0 text-[13px] font-normal transition-colors border-b border-[#1a1a1a] ${
                   selectedCategory === cat.slug
-                    ? 'text-white'
-                    : 'text-[#888] hover:text-white'
+                    ? 'text-white font-medium'
+                    : 'text-[#666] hover:text-white'
                 }`}
               >
                 <span>{cat.name}</span>

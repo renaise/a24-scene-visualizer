@@ -204,19 +204,55 @@ body {
   pointer-events: none;
 }
 
-/* Frosted glass button - Monologue-inspired subtle hover */
-.glass-button {
+/* Monologue button - clean, bordered, minimal */
+.monologue-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255);
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.monologue-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.monologue-button:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.monologue-button:hover::before {
+  width: 100%;
+}
+
+/* Frosted glass input */
+.glass-input {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+.glass-input:hover,
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Background video - A24 aesthetic */
