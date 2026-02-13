@@ -29,16 +29,16 @@ function App() {
                 alt="CineBox"
                 className="h-[20px] opacity-100"
               />
-              <nav className="mono-text flex items-center gap-12">
+              <nav className="flex items-center gap-10">
                 <a
                   href="mailto:developer@codexfoundry.com"
-                  className="text-[11px] tracking-[0.15em] text-white hover:opacity-70 transition-opacity uppercase"
+                  className="text-[13px] tracking-[0.02em] text-white hover:opacity-60 transition-opacity font-normal"
                 >
                   Contact
                 </a>
                 <a
                   href="#"
-                  className="text-[11px] tracking-[0.15em] text-white hover:opacity-70 transition-opacity uppercase"
+                  className="text-[13px] tracking-[0.02em] text-white hover:opacity-60 transition-opacity font-normal"
                 >
                   Login
                 </a>
@@ -63,20 +63,13 @@ function App() {
           {/* Video Overlay */}
           <div className="bg-video-overlay"></div>
 
-          {/* CineBox Background Watermark */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-[0.02] z-10">
-            <h1 className="text-[280px] md:text-[400px] font-medium text-white tracking-[-0.05em] select-none">
-              CineBox
-            </h1>
-          </div>
-
           {/* Content */}
-          <div className="max-w-[960px] mx-auto w-full relative z-10 px-6">
-            <h2 className="mono-text text-[48px] md:text-[64px] leading-[1.1] text-white mb-8 tracking-[0.02em] text-center uppercase">
+          <div className="max-w-[860px] mx-auto w-full relative z-10 px-6">
+            <h2 className="text-[56px] md:text-[72px] leading-[1.05] text-white mb-6 tracking-[-0.02em] text-center font-medium">
               A24 Cinema Lab
             </h2>
-            <p className="mono-text text-[13px] md:text-[14px] leading-[1.6] text-[#999999] max-w-[720px] mx-auto tracking-[0.05em] mb-20 text-center uppercase">
-              Explore visual relationships • Discover scenes by composition, color, and cinematic DNA
+            <p className="text-[16px] md:text-[18px] leading-[1.5] text-[#999999] max-w-[640px] mx-auto tracking-[0.01em] mb-20 text-center font-normal">
+              Explore visual relationships across A24 films. Discover scenes by composition, color, and cinematic DNA.
             </p>
 
             {/* Input */}
@@ -90,7 +83,7 @@ function App() {
             {/* Button */}
             <button
               onClick={handleEnterGallery}
-              className="monologue-button w-full rounded-none"
+              className="w-full px-8 py-4 bg-white text-black text-[13px] font-medium tracking-[0.02em] hover:bg-[#e6e6e6] transition-all duration-200"
             >
               Explore Cinema
             </button>
@@ -99,8 +92,8 @@ function App() {
 
         {/* Footer */}
         <footer className="py-8 text-center border-t border-[#1a1a1a]">
-          <p className="mono-text text-[9px] tracking-[0.2em] text-[#666666] uppercase">
-            Made by Renaise 2026 ©
+          <p className="text-[11px] tracking-[0.05em] text-[#666666] font-normal">
+            Made by Renaise © 2026
           </p>
         </footer>
       </div>
@@ -264,7 +257,7 @@ function App() {
         <div className="flex items-center gap-1 bg-[rgba(0,0,0,0.9)] backdrop-filter backdrop-blur-2xl rounded-full p-2 border border-[rgba(255,255,255,0.15)] shadow-2xl">
           <button
             onClick={() => setViewMode('lab')}
-            className={`mono-text px-10 py-3.5 text-[12px] uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
+            className={`px-10 py-3.5 text-[13px] uppercase tracking-[0.15em] font-medium transition-all duration-300 rounded-full ${
               viewMode === 'lab'
                 ? 'view-toggle-active text-white'
                 : 'text-[#666] hover:text-[#999]'
@@ -274,7 +267,7 @@ function App() {
           </button>
           <button
             onClick={() => setViewMode('stage')}
-            className={`mono-text px-10 py-3.5 text-[12px] uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
+            className={`px-10 py-3.5 text-[13px] uppercase tracking-[0.15em] font-medium transition-all duration-300 rounded-full ${
               viewMode === 'stage'
                 ? 'view-toggle-active text-white'
                 : 'text-[#666] hover:text-[#999]'
@@ -287,8 +280,8 @@ function App() {
 
       {/* Footer */}
       <div className="h-[52px] bg-[#0a0a0a] border-t border-[#1a1a1a] flex items-center justify-center flex-shrink-0">
-        <p className="mono-text text-[9px] tracking-[0.2em] text-[#666666] uppercase">
-          Made by Renaise 2026 ©
+        <p className="text-[11px] tracking-[0.05em] text-[#666666] font-normal">
+          Made by Renaise © 2026
         </p>
       </div>
     </div>
