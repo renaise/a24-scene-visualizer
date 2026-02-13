@@ -122,14 +122,21 @@ function App() {
       <div className="flex-1 flex overflow-hidden">
         {/* Left Sidebar - Categories */}
         <div className="w-[240px] bg-[#0a0a0a] border-r border-[#1a1a1a] flex-shrink-0 flex flex-col">
-          {/* Back button */}
-          <button
-            onClick={() => setView('home')}
-            className="flex items-center gap-2 px-6 py-5 text-[11px] font-medium text-[#999] hover:text-white transition-colors border-b border-[#1a1a1a] bg-transparent"
-          >
-            <ChevronLeft className="w-3 h-3" />
-            <span className="uppercase tracking-wider">Back to Overview</span>
-          </button>
+          {/* Logo header */}
+          <div className="px-6 py-6 border-b border-[#1a1a1a] flex items-center justify-between">
+            <img
+              src="/cinebox-logo.svg"
+              alt="CineBox"
+              className="h-[20px] opacity-100 cursor-pointer"
+              onClick={() => setView('home')}
+            />
+            <button
+              onClick={() => setView('home')}
+              className="text-[#666] hover:text-white transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+          </div>
 
           {/* Categories */}
           <div className="flex-1 px-6 py-8 overflow-y-auto">
@@ -137,10 +144,10 @@ function App() {
               <button
                 key={cat.slug}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`w-full text-left py-3 px-0 text-[13px] font-normal transition-colors border-b border-[#1a1a1a] ${
+                className={`w-full text-left py-3 px-0 text-[14px] transition-colors border-b border-[#1a1a1a] ${
                   selectedCategory === cat.slug
                     ? 'text-white font-medium'
-                    : 'text-[#666] hover:text-white'
+                    : 'text-[#999] hover:text-white font-normal'
                 }`}
               >
                 <span>{cat.name}</span>
@@ -159,14 +166,14 @@ function App() {
           {/* Top bar */}
           <div className="absolute top-0 left-0 right-0 h-[80px] flex items-center justify-between px-12 z-20">
             <div className="text-center flex-1">
-              <div className="text-[11px] text-[#666] uppercase tracking-wider mb-1">
+              <div className="text-[13px] text-[#aaa] uppercase tracking-wider mb-1 font-medium">
                 {currentScene.director}
               </div>
-              <div className="text-[10px] text-[#444] uppercase tracking-widest">
+              <div className="text-[11px] text-[#777] uppercase tracking-widest">
                 Photography
               </div>
             </div>
-            <button className="text-[#666] hover:text-white transition-colors">
+            <button className="text-[#999] hover:text-white transition-colors">
               <Menu className="w-5 h-5" />
             </button>
           </div>
@@ -188,20 +195,20 @@ function App() {
 
           {/* Bottom metadata */}
           <div className="absolute bottom-12 left-12 right-12 flex items-center justify-between z-20">
-            <div className="text-[11px] text-[#666]">
+            <div className="text-[13px] text-[#aaa] font-medium">
               {currentScene.film} • {currentScene.timestamp}
             </div>
-            <div className="flex items-center gap-4 text-[10px] text-[#666]">
+            <div className="flex items-center gap-4 text-[11px] text-[#999]">
               <button className="hover:text-white transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </button>
               <button className="hover:text-white transition-colors flex items-center gap-1.5">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                 </svg>
-                <span className="text-[9px] uppercase tracking-wider">15</span>
+                <span className="text-[10px] uppercase tracking-wider font-medium">15</span>
               </button>
             </div>
           </div>
