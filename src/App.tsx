@@ -19,29 +19,29 @@ function App() {
   if (view === 'home') {
     return (
       <div className="min-h-screen bg-black flex flex-col">
-        {/* Header */}
-        <header className="border-b border-[#1a1a1a] bg-black">
-          <div className="max-w-[1400px] mx-auto px-8 py-6">
+        {/* Header - Monologue style */}
+        <header className="glass-input border-b border-[rgba(255,255,255,0.1)]">
+          <div className="max-w-[1400px] mx-auto px-10 py-6">
             <div className="flex items-center justify-between">
               <img
                 src="/cinebox-logo.svg"
                 alt="CineBox"
-                className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
+                className="h-[20px] opacity-100"
               />
-              <div className="flex items-center gap-8">
+              <nav className="flex items-center gap-12">
                 <a
                   href="mailto:developer@codexfoundry.com"
-                  className="text-[13px] font-normal tracking-[0.05em] text-[#999999] hover:text-white transition-colors"
+                  className="text-[13px] font-medium tracking-[0.1em] text-white hover:opacity-70 transition-opacity uppercase"
                 >
                   Contact
                 </a>
                 <a
                   href="#"
-                  className="text-[13px] font-normal tracking-[0.05em] text-[#999999] hover:text-white transition-colors"
+                  className="text-[13px] font-medium tracking-[0.1em] text-white hover:opacity-70 transition-opacity uppercase"
                 >
                   Login
                 </a>
-              </div>
+              </nav>
             </div>
           </div>
         </header>

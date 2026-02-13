@@ -204,40 +204,26 @@ body {
   pointer-events: none;
 }
 
-/* Monologue button - clean, bordered, minimal */
+/* Monologue button - clean, frosted, minimal */
 .monologue-button {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: rgb(255, 255, 255);
-  padding: 16px 32px;
+  padding: 18px 40px;
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.monologue-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: -1;
 }
 
 .monologue-button:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.monologue-button:hover::before {
-  width: 100%;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Frosted glass input */
