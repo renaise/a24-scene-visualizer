@@ -264,7 +264,7 @@ body {
   height: 130%;
   aspect-ratio: 2.34 / 1;
   object-fit: cover;
-  opacity: 0.35;
+  opacity: 1.0;
   pointer-events: none;
   z-index: 0;
   filter: blur(2px);
@@ -281,7 +281,7 @@ body {
 .bg-video-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
   z-index: 1;
   pointer-events: none;
 }

@@ -28,16 +28,16 @@ function App() {
                 alt="CineBox"
                 className="h-[18px] opacity-90 hover:opacity-100 transition-opacity"
               />
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-8">
                 <a
                   href="mailto:developer@codexfoundry.com"
-                  className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
+                  className="text-[13px] font-normal tracking-[0.05em] text-[#999999] hover:text-white transition-colors"
                 >
                   Contact
                 </a>
                 <a
                   href="#"
-                  className="text-[10px] font-normal tracking-[0.2em] text-[#666666] hover:text-white transition-colors uppercase"
+                  className="text-[13px] font-normal tracking-[0.05em] text-[#999999] hover:text-white transition-colors"
                 >
                   Login
                 </a>
@@ -70,11 +70,11 @@ function App() {
           </div>
 
           {/* Content */}
-          <div className="max-w-[740px] mx-auto w-full relative z-10">
-            <h2 className="text-[56px] md:text-[72px] leading-[1.0] font-bold text-white mb-6 tracking-[-0.02em] text-center">
+          <div className="max-w-[960px] mx-auto w-full relative z-10 px-6">
+            <h2 className="text-[64px] md:text-[96px] leading-[0.95] font-medium text-white mb-8 tracking-[-0.04em] text-center">
               Every frame a gallery
             </h2>
-            <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#cccccc] max-w-[620px] mx-auto font-medium tracking-[0.01em] mb-16 text-center">
+            <p className="text-[16px] md:text-[18px] leading-[1.5] text-[#999999] max-w-[720px] mx-auto font-normal tracking-[0.02em] mb-20 text-center">
               Browse cinema's most striking scenes. Build your collection. Transform your space into a living archive.
             </p>
 
