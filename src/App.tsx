@@ -8,7 +8,7 @@ function App() {
   const [prompt, setPrompt] = useState('')
   const [currentSceneId, setCurrentSceneId] = useState(A24_SCENES[0].id)
   const [selectedCategory, setSelectedCategory] = useState('editorial')
-  const [viewMode, setViewMode] = useState<'grid' | 'cosmos'>('grid')
+  const [viewMode, setViewMode] = useState<'lab' | 'stage'>('lab')
 
   const currentScene = A24_SCENES.find(s => s.id === currentSceneId) || A24_SCENES[0]
   const filteredScenes = A24_SCENES.filter(s => s.category === selectedCategory)
@@ -20,7 +20,7 @@ function App() {
   if (view === 'home') {
     return (
       <div className="min-h-screen bg-black flex flex-col">
-        {/* Header - Monologue style */}
+        {/* Header */}
         <header className="glass-input border-b border-[rgba(255,255,255,0.1)]">
           <div className="max-w-[1400px] mx-auto px-10 py-6">
             <div className="flex items-center justify-between">
@@ -29,16 +29,16 @@ function App() {
                 alt="CineBox"
                 className="h-[20px] opacity-100"
               />
-              <nav className="flex items-center gap-12">
+              <nav className="mono-text flex items-center gap-12">
                 <a
                   href="mailto:developer@codexfoundry.com"
-                  className="text-[13px] font-medium tracking-[0.1em] text-white hover:opacity-70 transition-opacity uppercase"
+                  className="text-[11px] tracking-[0.15em] text-white hover:opacity-70 transition-opacity uppercase"
                 >
                   Contact
                 </a>
                 <a
                   href="#"
-                  className="text-[13px] font-medium tracking-[0.1em] text-white hover:opacity-70 transition-opacity uppercase"
+                  className="text-[11px] tracking-[0.15em] text-white hover:opacity-70 transition-opacity uppercase"
                 >
                   Login
                 </a>
@@ -72,11 +72,11 @@ function App() {
 
           {/* Content */}
           <div className="max-w-[960px] mx-auto w-full relative z-10 px-6">
-            <h2 className="text-[64px] md:text-[96px] leading-[0.95] font-medium text-white mb-8 tracking-[-0.04em] text-center">
-              Navigate the universe of cinema
+            <h2 className="mono-text text-[48px] md:text-[64px] leading-[1.1] text-white mb-8 tracking-[0.02em] text-center uppercase">
+              A24 Cinema Lab
             </h2>
-            <p className="text-[16px] md:text-[18px] leading-[1.5] text-[#999999] max-w-[720px] mx-auto font-normal tracking-[0.02em] mb-20 text-center">
-              Explore visual relationships across A24 films. Discover scenes by composition, color, and cinematic DNA.
+            <p className="mono-text text-[13px] md:text-[14px] leading-[1.6] text-[#999999] max-w-[720px] mx-auto tracking-[0.05em] mb-20 text-center uppercase">
+              Explore visual relationships • Discover scenes by composition, color, and cinematic DNA
             </p>
 
             {/* Input */}
@@ -99,7 +99,7 @@ function App() {
 
         {/* Footer */}
         <footer className="py-8 text-center border-t border-[#1a1a1a]">
-          <p className="text-[10px] font-normal tracking-[0.15em] text-[#666666] uppercase">
+          <p className="mono-text text-[9px] tracking-[0.2em] text-[#666666] uppercase">
             Made by Renaise 2026 ©
           </p>
         </footer>
@@ -155,7 +155,7 @@ function App() {
                 Quick Actions
               </div>
               <button className="mono-text w-full text-left py-2.5 px-3 text-[11px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)] uppercase">
-                Cosmos Map
+                Stage View
               </button>
               <button className="mono-text w-full text-left py-2.5 px-3 text-[11px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)] uppercase">
                 Random
@@ -263,31 +263,31 @@ function App() {
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-[rgba(0,0,0,0.9)] backdrop-filter backdrop-blur-2xl rounded-full p-2 border border-[rgba(255,255,255,0.15)] shadow-2xl">
           <button
-            onClick={() => setViewMode('grid')}
+            onClick={() => setViewMode('lab')}
             className={`mono-text px-10 py-3.5 text-[12px] uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
-              viewMode === 'grid'
+              viewMode === 'lab'
                 ? 'view-toggle-active text-white'
                 : 'text-[#666] hover:text-[#999]'
             }`}
           >
-            Grid
+            Lab
           </button>
           <button
-            onClick={() => setViewMode('cosmos')}
+            onClick={() => setViewMode('stage')}
             className={`mono-text px-10 py-3.5 text-[12px] uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
-              viewMode === 'cosmos'
+              viewMode === 'stage'
                 ? 'view-toggle-active text-white'
                 : 'text-[#666] hover:text-[#999]'
             }`}
           >
-            Cosmos
+            Stage
           </button>
         </div>
       </div>
 
       {/* Footer */}
       <div className="h-[52px] bg-[#0a0a0a] border-t border-[#1a1a1a] flex items-center justify-center flex-shrink-0">
-        <p className="text-[10px] font-normal tracking-[0.15em] text-[#666666] uppercase">
+        <p className="mono-text text-[9px] tracking-[0.2em] text-[#666666] uppercase">
           Made by Renaise 2026 ©
         </p>
       </div>
