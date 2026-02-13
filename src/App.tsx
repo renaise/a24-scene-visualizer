@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import { Menu, ChevronLeft } from 'lucide-react'
 import './index.css'
-import { A24_SCENES, CATEGORIES } from './data/a24-scenes'
+import { A24_SCENES } from './data/a24-scenes'
 
 function App() {
   const [view, setView] = useState<'home' | 'explore'>('home')
   const [prompt, setPrompt] = useState('')
   const [currentSceneId, setCurrentSceneId] = useState(A24_SCENES[0].id)
-  const [selectedCategory, setSelectedCategory] = useState('editorial')
   const [viewMode, setViewMode] = useState<'lab' | 'stage'>('lab')
   const [showLogin, setShowLogin] = useState(false)
 
   const currentScene = A24_SCENES.find(s => s.id === currentSceneId) || A24_SCENES[0]
-  const filteredScenes = A24_SCENES.filter(s => s.category === selectedCategory)
+  const filteredScenes = A24_SCENES
 
   const handleEnterGallery = () => {
     setView('explore')
@@ -154,38 +153,41 @@ function App() {
             </button>
           </div>
 
-          {/* Exploration Paths */}
-          <div className="flex-1 px-6 py-6 overflow-y-auto">
-            <div className="mono-text text-[9px] text-[#666] uppercase tracking-widest mb-4">
-              Explore By
-            </div>
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.slug}
-                onClick={() => setSelectedCategory(cat.slug)}
-                className={`mono-text w-full text-left py-3 px-3 text-[11px] uppercase transition-all mb-1 rounded-md ${
-                  selectedCategory === cat.slug
-                    ? 'text-white bg-[rgba(255,255,255,0.08)]'
-                    : 'text-[#999] hover:text-white hover:bg-[rgba(255,255,255,0.03)]'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span>{cat.name}</span>
-                  <span className="text-[9px] text-[#666]">{cat.count}</span>
-                </div>
-              </button>
-            ))}
-
-            <div className="mt-8 pt-6 border-t border-[#1a1a1a]">
-              <div className="mono-text text-[9px] text-[#666] uppercase tracking-widest mb-4">
-                Quick Actions
+          {/* Cinematic Shots */}
+          <div className="flex-1 py-4 overflow-y-auto">
+            <div className="px-4 mb-4">
+              <div className="text-[10px] text-[#666] uppercase tracking-wider mb-2 font-medium">
+                {filteredScenes.length} Scenes
               </div>
-              <button className="mono-text w-full text-left py-2.5 px-3 text-[11px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)] uppercase">
-                Stage View
-              </button>
-              <button className="mono-text w-full text-left py-2.5 px-3 text-[11px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)] uppercase">
-                Random
-              </button>
+            </div>
+            <div className="space-y-2 px-3">
+              {filteredScenes.map((scene) => (
+                <button
+                  key={scene.id}
+                  onClick={() => setCurrentSceneId(scene.id)}
+                  className={`w-full group transition-all ${
+                    scene.id === currentSceneId
+                      ? 'opacity-100'
+                      : 'opacity-40 hover:opacity-100'
+                  }`}
+                >
+                  <div className="aspect-video rounded overflow-hidden bg-[#0a0a0a] mb-2">
+                    <img
+                      src={scene.url}
+                      alt={scene.film}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="text-left px-1">
+                    <div className="text-[11px] text-white font-medium mb-0.5 truncate">
+                      {scene.film}
+                    </div>
+                    <div className="text-[9px] text-[#666] truncate">
+                      {scene.director} • {scene.year}
+                    </div>
+                  </div>
+                </button>
+              ))}
             </div>
           </div>
         </div>
