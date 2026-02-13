@@ -109,24 +109,7 @@ function App() {
 
   // Explore View
   return (
-    <div className="h-screen bg-[#0a0a0a] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="h-[60px] glass-input border-b border-[rgba(255,255,255,0.1)] flex items-center px-8 flex-shrink-0">
-        <div className="flex items-center justify-between w-full">
-          <img
-            src="/cinebox-logo.svg"
-            alt="CineBox"
-            className="h-[20px] cursor-pointer"
-            onClick={() => setView('home')}
-          />
-          <div className="text-[11px] text-[#666] uppercase tracking-wider">
-            {filteredScenes.length} Scenes • A24 Films
-          </div>
-        </div>
-      </div>
-
-      {/* Main content */}
-      <div className="flex-1 flex overflow-hidden">
+    <div className="h-screen bg-[#0a0a0a] flex overflow-hidden">
         {/* Left Sidebar - Categories */}
         <div className="w-[240px] bg-[#0a0a0a] border-r border-[#1a1a1a] flex-shrink-0 flex flex-col">
           {/* Logo header */}
@@ -147,35 +130,35 @@ function App() {
 
           {/* Exploration Paths */}
           <div className="flex-1 px-6 py-6 overflow-y-auto">
-            <div className="text-[10px] text-[#666] uppercase tracking-widest mb-4 font-medium">
+            <div className="mono-text text-[9px] text-[#666] uppercase tracking-widest mb-4">
               Explore By
             </div>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.slug}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`w-full text-left py-3 px-3 text-[13px] transition-all mb-1 rounded-md ${
+                className={`mono-text w-full text-left py-3 px-3 text-[11px] uppercase transition-all mb-1 rounded-md ${
                   selectedCategory === cat.slug
-                    ? 'text-white font-medium bg-[rgba(255,255,255,0.08)]'
-                    : 'text-[#999] hover:text-white hover:bg-[rgba(255,255,255,0.03)] font-normal'
+                    ? 'text-white bg-[rgba(255,255,255,0.08)]'
+                    : 'text-[#999] hover:text-white hover:bg-[rgba(255,255,255,0.03)]'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span>{cat.name}</span>
-                  <span className="text-[10px] text-[#666]">{cat.count}</span>
+                  <span className="text-[9px] text-[#666]">{cat.count}</span>
                 </div>
               </button>
             ))}
 
             <div className="mt-8 pt-6 border-t border-[#1a1a1a]">
-              <div className="text-[10px] text-[#666] uppercase tracking-widest mb-4 font-medium">
+              <div className="mono-text text-[9px] text-[#666] uppercase tracking-widest mb-4">
                 Quick Actions
               </div>
-              <button className="w-full text-left py-2.5 px-3 text-[12px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)]">
-                View Cosmos Map
+              <button className="mono-text w-full text-left py-2.5 px-3 text-[11px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)] uppercase">
+                Cosmos Map
               </button>
-              <button className="w-full text-left py-2.5 px-3 text-[12px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)]">
-                Random Scene
+              <button className="mono-text w-full text-left py-2.5 px-3 text-[11px] text-[#999] hover:text-white transition-all rounded-md hover:bg-[rgba(255,255,255,0.03)] uppercase">
+                Random
               </button>
             </div>
           </div>
@@ -186,19 +169,19 @@ function App() {
           {/* Scene Context Bar */}
           <div className="absolute top-8 left-12 right-12 flex items-start justify-between z-20">
             <div>
-              <div className="text-[24px] text-white font-medium mb-2 tracking-tight">
+              <div className="mono-text text-[20px] text-white font-normal mb-2 uppercase">
                 {currentScene.film}
               </div>
-              <div className="flex items-center gap-4 text-[13px] text-[#999]">
+              <div className="mono-text flex items-center gap-4 text-[12px] text-[#999] uppercase">
                 <span>{currentScene.director}</span>
                 <span>•</span>
                 <span>{currentScene.year}</span>
                 <span>•</span>
-                <span className="uppercase tracking-wider text-[11px]">{currentScene.category}</span>
+                <span>{currentScene.category}</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button className="glass-input px-4 py-2 text-[11px] text-white uppercase tracking-wider hover:bg-[rgba(255,255,255,0.08)]">
+              <button className="mono-text glass-input px-4 py-2 text-[10px] text-white uppercase tracking-wider hover:bg-[rgba(255,255,255,0.08)]">
                 Similar Scenes
               </button>
               <button className="text-[#999] hover:text-white transition-colors">
@@ -226,23 +209,23 @@ function App() {
           <div className="absolute bottom-8 left-12 right-12 z-20">
             <div className="glass-input p-4 flex items-center justify-between">
               <div className="flex items-center gap-6">
-                <div className="text-[11px] text-[#666] uppercase tracking-wider">
-                  Related Films
+                <div className="mono-text text-[9px] text-[#666] uppercase tracking-wider">
+                  Related
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2 py-1 bg-[rgba(255,255,255,0.08)] text-[10px] text-white rounded uppercase tracking-wider">
+                  <span className="mono-text px-3 py-1.5 bg-[rgba(255,255,255,0.08)] text-[9px] text-white rounded uppercase">
                     Midsommar
                   </span>
-                  <span className="px-2 py-1 bg-[rgba(255,255,255,0.08)] text-[10px] text-white rounded uppercase tracking-wider">
+                  <span className="mono-text px-3 py-1.5 bg-[rgba(255,255,255,0.08)] text-[9px] text-white rounded uppercase">
                     Hereditary
                   </span>
-                  <span className="px-2 py-1 bg-[rgba(255,255,255,0.08)] text-[10px] text-white rounded uppercase tracking-wider">
+                  <span className="mono-text px-3 py-1.5 bg-[rgba(255,255,255,0.08)] text-[9px] text-white rounded uppercase">
                     The Witch
                   </span>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-[#999]">
-                <button className="hover:text-white transition-colors flex items-center gap-2 text-[11px] uppercase tracking-wider">
+                <button className="mono-text hover:text-white transition-colors flex items-center gap-2 text-[9px] uppercase tracking-wider">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                   </svg>
@@ -275,14 +258,13 @@ function App() {
             ))}
           </div>
         </div>
-      </div>
 
       {/* Floating View Toggle - LAB/STAGE Style */}
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
         <div className="flex items-center gap-1 bg-[rgba(0,0,0,0.9)] backdrop-filter backdrop-blur-2xl rounded-full p-2 border border-[rgba(255,255,255,0.15)] shadow-2xl">
           <button
             onClick={() => setViewMode('grid')}
-            className={`px-10 py-3.5 text-[14px] font-medium uppercase tracking-[0.2em] transition-all duration-300 rounded-full ${
+            className={`mono-text px-10 py-3.5 text-[12px] uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
               viewMode === 'grid'
                 ? 'view-toggle-active text-white'
                 : 'text-[#666] hover:text-[#999]'
@@ -292,7 +274,7 @@ function App() {
           </button>
           <button
             onClick={() => setViewMode('cosmos')}
-            className={`px-10 py-3.5 text-[14px] font-medium uppercase tracking-[0.2em] transition-all duration-300 rounded-full ${
+            className={`mono-text px-10 py-3.5 text-[12px] uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
               viewMode === 'cosmos'
                 ? 'view-toggle-active text-white'
                 : 'text-[#666] hover:text-[#999]'

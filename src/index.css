@@ -35,7 +35,7 @@
 
 @theme {
   --font-family-sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  --font-family-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  --font-family-mono: 'Courier New', 'Courier', 'SF Mono', 'Monaco', monospace;
 
   /* A24 Films: pure black & white, stark minimalism */
   --color-surface: rgb(0, 0, 0);
@@ -279,4 +279,10 @@ body {
   box-shadow:
     0 4px 20px rgba(0,0,0,0.5),
     inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* Monospace typography for dashboard */
+.mono-text {
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.02em;
 }
