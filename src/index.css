@@ -46,6 +46,11 @@
   --color-border-light: rgba(255, 255, 255, 0.05);
 }
 
+/* Utility: Radial gradient backgrounds */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
 * {
   box-sizing: border-box;
 }
@@ -80,18 +85,73 @@ body {
   animation: fadeBlur 0.8s ease-out;
 }
 
-/* A24 Films typography - clean, minimal, readable */
-h1, h2, h3 {
-  font-weight: 500;
-  letter-spacing: -0.02em;
+/* A24 Typography System - Editorial, confident, restrained */
+
+/* Headings - generous line height, thoughtful tracking */
+h1 {
+  font-size: 68px;
+  font-weight: 400;
   line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Body - generous line height for readability */
+p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.text-large {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.text-small {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Labels - uppercase, wide tracking */
+.label,
+.text-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+}
+
+/* Monospace - for technical data */
+.mono,
+.mono-text {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
 }
 
 /* Body text - clean and legible */
 body {
   font-weight: 400;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -281,8 +341,178 @@ body {
     inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
-/* Monospace typography for dashboard */
-.mono-text {
+/* A24-Worthy Micro-Interactions */
+
+/* Subtle button hover */
+.btn-a24 {
+  transition: opacity 200ms, transform 200ms;
+}
+
+.btn-a24:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.btn-a24:active {
+  transform: translateY(0);
+}
+
+/* Skeleton loading screens (not spinners) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s infinite;
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  height: 12px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+
+.skeleton-text--title {
+  width: 60%;
+  height: 16px;
+}
+
+.skeleton-text--meta {
+  width: 40%;
+  height: 10px;
+}
+
+/* Film-specific badges */
+.aspect-ratio-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  color: white;
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.timestamp-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
   font-family: var(--font-family-mono);
-  letter-spacing: 0.02em;
+  font-size: 10px;
+  color: white;
+  opacity: 0;
+  transition: opacity 200ms;
+  background: rgba(0,0,0,0.7);
+  padding: 4px 8px;
+  border-radius: 2px;
+  backdrop-filter: blur(10px);
+}
+
+/* Scene card with A24-level polish */
+.scene-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 200ms, border-color 200ms;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scene-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.scene-card:hover .timestamp-badge {
+  opacity: 0.7;
+}
+
+.scene-card img {
+  transition: transform 400ms;
+}
+
+.scene-card:hover img {
+  transform: scale(1.02);
+}
+
+/* Film credits styling */
+.film-credits {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+.film-credits strong {
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+/* Tag system (subtle) */
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 6px;
+  margin-top: 8px;
+  border-radius: 2px;
+  transition: background 200ms, border-color 200ms;
+}
+
+.tag:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.12);
+}
+
+/* Scroll indicator (subtle) */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 200ms;
+}
+
+.scroll-indicator:hover {
+  opacity: 0.8;
+}
+
+.scroll-indicator svg {
+  width: 16px;
+  height: 16px;
+  animation: scroll-bounce 2s infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
 }
